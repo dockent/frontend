@@ -12,7 +12,7 @@ class App extends Component {
                 <Container className='main-container'>
                     <Grid>
                         <Grid.Column width={4}>
-                                <Sidebar/>
+                            <Sidebar/>
                         </Grid.Column>
                         <Grid.Column width={12}>
                             <Route path='/' component={Dashboard}/>

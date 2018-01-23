@@ -3,14 +3,20 @@ import {bindActionCreators} from "redux";
 import * as DashboardActions from '../../actions/DashboardActions';
 import {connect} from "react-redux";
 
-export class Dashboard extends Component {
+class Dashboard extends Component {
+    componentWillMount() {
+        this.props.actions.requestData();
+    }
+
     render() {
         return (<p>dashboard</p>);
     }
 }
 
-function mapStateToProps() {
-    return {};
+function mapStateToProps(state) {
+    return {
+        dashboard: state.dashboard.payload
+    };
 }
 
 function mapDispatchToProps(dispatch) {
