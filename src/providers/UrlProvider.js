@@ -5,3 +5,9 @@ export class Dashboard {
         return `${baseUrl}/dashboard`;
     }
 }
+
+export class Containers {
+    static get list() {
+        return `${baseUrl}/container`;
+    }
+}

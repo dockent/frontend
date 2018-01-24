@@ -15,7 +15,7 @@ export default class Sidebar extends Component {
                     <Menu.Header>Containers</Menu.Header>
                     <Menu.Menu>
                         <Menu.Item>
-                            <Link to='/containers/list'>List</Link>
+                            <Link to='/containers'>List</Link>
                         </Menu.Item>
                         <Menu.Item>
                             <Link to='/containers/create'>Create</Link>

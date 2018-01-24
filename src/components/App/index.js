@@ -4,6 +4,7 @@ import Sidebar from "../Sidebar";
 import {Route, BrowserRouter as Router} from "react-router-dom";
 import Dashboard from "../Dashboard";
 import './App.css';
+import Containers from "../Containers";
 
 class App extends Component {
     render() {
@@ -19,7 +20,8 @@ class App extends Component {
                             <Sidebar/>
                         </Grid.Column>
                         <Grid.Column width={12}>
-                            <Route path='/' component={Dashboard}/>
+                            <Route exact path='/' component={Dashboard}/>
+                            <Route exact path='/containers' component={Containers}/>
                         </Grid.Column>
                     </Grid>
                 </Container>
