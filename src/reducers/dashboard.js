@@ -6,7 +6,7 @@ const initialState = {
     ServerVersion: 0,
     ContainersRunning: 0,
     ContainersPaused: 0,
-    ContainersStopper: 0,
+    ContainersStopped: 0,
     KernelVersion: 0,
     OperatingSystem: 0,
     OSType: 0,

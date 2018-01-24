@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Grid} from "semantic-ui-react";
+import {Container, Grid, Header, Icon} from "semantic-ui-react";
 import Sidebar from "../Sidebar";
 import {Route, BrowserRouter as Router} from "react-router-dom";
 import Dashboard from "../Dashboard";
@@ -10,6 +10,10 @@ class App extends Component {
         return (
             <Router>
                 <Container className='main-container'>
+                    <Header as='h2'>
+                        <Icon name='terminal' />
+                        <Header.Content>Dockent</Header.Content>
+                    </Header>
                     <Grid>
                         <Grid.Column width={4}>
                             <Sidebar/>
