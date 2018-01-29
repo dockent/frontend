@@ -9,17 +9,44 @@ import _ from 'lodash';
 class Containers extends Component {
     constructor(props) {
         super(props);
+        this.checkboxChangeState = this.checkboxChangeState.bind(this);
+        this.selectedItems = {};
         this.state = {
-            toolbarBtnState: {
-                play: false,
-                repeat: false,
-                stop: false,
-                remove: false
+            toolbarConfig: {
+                start: {
+                    label: 'Start',
+                    icon: 'play',
+                    action: () => {
+                        this.props.actions.startContainers(this.selectedItems);
+                    }
+                },
+                restart: {
+                    label: 'Restart',
+                    icon: 'repeat'
+                },
+                stop: {
+                    label: 'Stop',
+                    icon: 'stop'
+                },
+                remove: {
+                    label: 'Remove',
+                    icon: 'trash'
+                }
             }
         };
     }
+
     componentWillMount() {
         this.props.actions.requestData();
+    }
+
+    checkboxChangeState(event, data) {
+        if (data.checked && !(data.value in this.selectedItems)) {
+            this.selectedItems[data.value] = this.props.list[data.value];
+        }
+        if (!data.checked && (data.value in this.selectedItems)) {
+            delete this.selectedItems[data.value];
+        }
     }
 
     render() {
@@ -30,10 +57,9 @@ class Containers extends Component {
                 <Breadcrumb.Section active>Containers</Breadcrumb.Section>
             </Breadcrumb>
             <Menu secondary>
-                <Menu.Item active={this.state.toolbarBtnState.play}><Icon name='play'/>Start</Menu.Item>
-                <Menu.Item active={this.state.toolbarBtnState.repeat}><Icon name='repeat'/>Restart</Menu.Item>
-                <Menu.Item active={this.state.toolbarBtnState.stop}><Icon name='stop'/>Stop</Menu.Item>
-                <Menu.Item active={this.state.toolbarBtnState.remove}><Icon name='trash'/>Remove</Menu.Item>
+                {_.map(this.state.toolbarConfig, (value, key) => (
+                    <Menu.Item key={key} onClick={value.action}><Icon name={value.icon}/>{value.label}</Menu.Item>
+                ))}
             </Menu>
             <Table celled striped>
                 <Table.Header>
@@ -45,7 +71,7 @@ class Containers extends Component {
                 </Table.Header>
                 <Table.Body>
                     {_.map(this.props.list, (value, key) => (<Table.Row key={key}>
-                        <Table.Cell><Checkbox/></Table.Cell>
+                        <Table.Cell><Checkbox onChange={this.checkboxChangeState} value={key}/></Table.Cell>
                         <Table.Cell>
                             <Header as='h4'>
                                 <Header.Content>{value.Names.join('; ')}</Header.Content>

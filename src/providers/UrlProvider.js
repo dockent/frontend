@@ -10,4 +10,8 @@ export class Containers {
     static get list() {
         return `${baseUrl}/container`;
     }
+
+    static get start() {
+        return `${baseUrl}/container/start`;
+    }
 }
