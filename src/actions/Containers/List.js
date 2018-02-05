@@ -32,9 +32,9 @@ export function startContainers(selected) {
         dispatch({type: CONTAINERS_START_REQUEST, payload: selected});
         fetch(Containers.start, {
             method: 'POST',
-            body: {
+            body: JSON.stringify({
                 id: _.map(selected, (value) => (value.Id))
-            }
+            })
         })
             .then((response) => {
                 response.json()
