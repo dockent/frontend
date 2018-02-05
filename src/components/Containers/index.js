@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import * as ContainersListActions from '../../actions/Containers/List';
 import {connect} from "react-redux";
-import {Breadcrumb, Checkbox, Container, Header, Icon, Menu, Table} from "semantic-ui-react";
+import {Breadcrumb, Checkbox, Container, Header, Icon, Menu, Table, Label} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import _ from 'lodash';
 
@@ -22,15 +22,31 @@ class Containers extends Component {
                 },
                 restart: {
                     label: 'Restart',
-                    icon: 'repeat'
+                    icon: 'repeat',
+                    action: () => {
+                        this.props.actions.restartContainers(this.selectedItems);
+                    }
+                },
+                edit: {
+                    label: 'Edit',
+                    icon: 'pencil',
+                    action: () => {
+                        this.props.actions.editContainer(this.selectedItems);
+                    }
                 },
                 stop: {
                     label: 'Stop',
-                    icon: 'stop'
+                    icon: 'stop',
+                    action: () => {
+                        this.props.actions.stopContainers(this.selectedItems);
+                    }
                 },
                 remove: {
                     label: 'Remove',
-                    icon: 'trash'
+                    icon: 'trash',
+                    action: () => {
+                        this.props.actions.removeContainers(this.selectedItems);
+                    }
                 }
             }
         };
@@ -47,6 +63,17 @@ class Containers extends Component {
         if (!data.checked && (data.value in this.selectedItems)) {
             delete this.selectedItems[data.value];
         }
+    }
+
+    mapStateToColor(state) {
+        let map = {
+            running: 'green',
+            exited: 'red'
+        };
+        if (!state in map) {
+            return 'grey';
+        }
+        return map[state];
     }
 
     render() {
@@ -74,7 +101,7 @@ class Containers extends Component {
                         <Table.Cell><Checkbox onChange={this.checkboxChangeState} value={key}/></Table.Cell>
                         <Table.Cell>
                             <Header as='h4'>
-                                <Header.Content>{value.Names.join('; ')}</Header.Content>
+                                <Header.Content><Label circular color={this.mapStateToColor(value.State)} empty /> {value.Names.join('; ')}</Header.Content>
                                 <Header.Subheader>{value.Image}</Header.Subheader>
                             </Header>
                         </Table.Cell>

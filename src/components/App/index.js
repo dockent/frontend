@@ -5,6 +5,7 @@ import {Route, BrowserRouter as Router} from "react-router-dom";
 import Dashboard from "../Dashboard";
 import './App.css';
 import Containers from "../Containers";
+import Notifications from 'react-notify-toast';
 
 class App extends Component {
     render() {
@@ -24,6 +25,7 @@ class App extends Component {
                             <Route exact path='/containers' component={Containers}/>
                         </Grid.Column>
                     </Grid>
+                    <Notifications />
                 </Container>
             </Router>
         );

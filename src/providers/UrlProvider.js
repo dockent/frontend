@@ -14,4 +14,16 @@ export class Containers {
     static get start() {
         return `${baseUrl}/container/start`;
     }
+
+    static get restart() {
+        return `${baseUrl}/container/restart`;
+    }
+
+    static get stop() {
+        return `${baseUrl}/container/stop`;
+    }
+
+    static get remove() {
+        return `${baseUrl}/container/remove`;
+    }
 }
