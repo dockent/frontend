@@ -48,6 +48,7 @@ export function startContainers(selected) {
                             type: CONTAINERS_START_SUCCESS,
                             payload: data
                         });
+                        requestData();
                     });
             })
             .catch((error) => {
@@ -77,6 +78,7 @@ export function restartContainers(selected) {
                             type: CONTAINERS_RESTART_SUCCESS,
                             payload: data
                         });
+                        requestData();
                     });
             })
             .catch((error) => {
@@ -86,12 +88,6 @@ export function restartContainers(selected) {
                     payload: error
                 });
             });
-    };
-}
-
-export function editContainer(selected) {
-    return (dispatch) => {
-        
     };
 }
 
@@ -112,6 +108,7 @@ export function stopContainers(selected) {
                             type: CONTAINERS_STOP_SUCCESS,
                             payload: data
                         });
+                        requestData();
                     });
             })
             .catch((error) => {
@@ -141,6 +138,7 @@ export function removeContainers(selected) {
                             type: CONTAINERS_REMOVE_SUCCESS,
                             payload: data
                         });
+                        requestData();
                     });
             })
             .catch((error) => {

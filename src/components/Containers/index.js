@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {Breadcrumb, Checkbox, Container, Header, Icon, Menu, Table, Label} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import _ from 'lodash';
+import './index.css';
 
 class Containers extends Component {
     constructor(props) {
@@ -25,13 +26,6 @@ class Containers extends Component {
                     icon: 'repeat',
                     action: () => {
                         this.props.actions.restartContainers(this.selectedItems);
-                    }
-                },
-                edit: {
-                    label: 'Edit',
-                    icon: 'pencil',
-                    action: () => {
-                        this.props.actions.editContainer(this.selectedItems);
                     }
                 },
                 stop: {
@@ -70,7 +64,7 @@ class Containers extends Component {
             running: 'green',
             exited: 'red'
         };
-        if (!state in map) {
+        if (!(state in map)) {
             return 'grey';
         }
         return map[state];
@@ -101,7 +95,11 @@ class Containers extends Component {
                         <Table.Cell><Checkbox onChange={this.checkboxChangeState} value={key}/></Table.Cell>
                         <Table.Cell>
                             <Header as='h4'>
-                                <Header.Content><Label circular color={this.mapStateToColor(value.State)} empty /> {value.Names.join('; ')}</Header.Content>
+                                <Header.Content>
+                                    <Label circular color={this.mapStateToColor(value.State)} empty/>
+                                    <Link className='header-link'
+                                          to={`/containers/view/${value.Id}`}>{value.Names.join('; ')}</Link>
+                                </Header.Content>
                                 <Header.Subheader>{value.Image}</Header.Subheader>
                             </Header>
                         </Table.Cell>

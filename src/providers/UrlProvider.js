@@ -26,4 +26,8 @@ export class Containers {
     static get remove() {
         return `${baseUrl}/container/remove`;
     }
+
+    static inspect(id) {
+        return `${baseUrl}/container/view/${id}`;
+    }
 }
