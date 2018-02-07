@@ -2,47 +2,55 @@ import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import * as ContainersListActions from '../../actions/Containers/List';
 import {connect} from "react-redux";
-import {Breadcrumb, Checkbox, Container, Header, Icon, Menu, Table, Label} from "semantic-ui-react";
+import {Breadcrumb, Checkbox, Container, Header, Table, Label} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import _ from 'lodash';
 import './index.css';
+import Toolbar from "../Toolbar";
 
 class Containers extends Component {
     constructor(props) {
         super(props);
         this.checkboxChangeState = this.checkboxChangeState.bind(this);
-        this.selectedItems = {};
-        this.state = {
-            toolbarConfig: {
-                start: {
-                    label: 'Start',
-                    icon: 'play',
-                    action: () => {
-                        this.props.actions.startContainers(this.selectedItems);
-                    }
+        let toolbarConfig = {
+            start: {
+                label: 'Start',
+                icon: 'play',
+                action: () => {
+                    this.props.actions.startContainers(this.state.selectedItems);
                 },
-                restart: {
-                    label: 'Restart',
-                    icon: 'repeat',
-                    action: () => {
-                        this.props.actions.restartContainers(this.selectedItems);
-                    }
-                },
-                stop: {
-                    label: 'Stop',
-                    icon: 'stop',
-                    action: () => {
-                        this.props.actions.stopContainers(this.selectedItems);
-                    }
-                },
-                remove: {
-                    label: 'Remove',
-                    icon: 'trash',
-                    action: () => {
-                        this.props.actions.removeContainers(this.selectedItems);
-                    }
+                isActive: () => {
+                    return _.toArray(this.state.selectedItems).length > 0;
                 }
+            },
+            restart: {
+                label: 'Restart',
+                icon: 'repeat',
+                action: () => {
+                    this.props.actions.restartContainers(this.state.selectedItems);
+                },
+                isActive: () => (true)
+            },
+            stop: {
+                label: 'Stop',
+                icon: 'stop',
+                action: () => {
+                    this.props.actions.stopContainers(this.state.selectedItems);
+                },
+                isActive: () => (true)
+            },
+            remove: {
+                label: 'Remove',
+                icon: 'trash',
+                action: () => {
+                    this.props.actions.removeContainers(this.state.selectedItems);
+                },
+                isActive: () => (true)
             }
+        };
+        this.state = {
+            toolbarConfig: toolbarConfig,
+            selectedItems: {}
         };
     }
 
@@ -51,11 +59,19 @@ class Containers extends Component {
     }
 
     checkboxChangeState(event, data) {
-        if (data.checked && !(data.value in this.selectedItems)) {
-            this.selectedItems[data.value] = this.props.list[data.value];
+        if (data.checked && !(data.value in this.state.selectedItems)) {
+            let state = this.state.selectedItems;
+            state[data.value] = this.props.list[data.value];
+            this.setState({
+                selectedItems: state
+            });
         }
-        if (!data.checked && (data.value in this.selectedItems)) {
-            delete this.selectedItems[data.value];
+        if (!data.checked && (data.value in this.state.selectedItems)) {
+            let state = this.state.selectedItems;
+            delete state[data.value];
+            this.setState({
+                selectedItems: state
+            });
         }
     }
 
@@ -77,11 +93,7 @@ class Containers extends Component {
                 <Breadcrumb.Divider/>
                 <Breadcrumb.Section active>Containers</Breadcrumb.Section>
             </Breadcrumb>
-            <Menu secondary>
-                {_.map(this.state.toolbarConfig, (value, key) => (
-                    <Menu.Item key={key} onClick={value.action}><Icon name={value.icon}/>{value.label}</Menu.Item>
-                ))}
-            </Menu>
+            <Toolbar toolbarConfig={this.state.toolbarConfig} selectedItems={this.state.selectedItems}/>
             <Table celled striped>
                 <Table.Header>
                     <Table.Row>
