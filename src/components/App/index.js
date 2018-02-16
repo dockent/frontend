@@ -7,6 +7,7 @@ import './App.css';
 import Containers from "../Containers";
 import Notifications from 'react-notify-toast';
 import View from "../Containers/View";
+import Create from '../Containers/Create'
 
 class App extends Component {
     render() {
@@ -25,6 +26,7 @@ class App extends Component {
                             <Route exact path='/' component={Dashboard}/>
                             <Route exact path='/containers' component={Containers}/>
                             <Route exact path='/containers/view/:id' component={View}/>
+                            <Route exact path='/containers/create' component={Create}/>
                         </Grid.Column>
                     </Grid>
                     <Notifications />
