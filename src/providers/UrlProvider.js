@@ -30,4 +30,8 @@ export class Containers {
     static inspect(id) {
         return `${baseUrl}/container/view/${id}`;
     }
+
+    static get create() {
+        return `${baseUrl}/container/create`;
+    }
 }
