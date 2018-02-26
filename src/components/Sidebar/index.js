@@ -26,10 +26,10 @@ export default class Sidebar extends Component {
                     <Menu.Header>Images</Menu.Header>
                     <Menu.Menu>
                         <Menu.Item>
-                            <Link to='/images/list'>List</Link>
+                            <Link to='/images'>List</Link>
                         </Menu.Item>
                         <Menu.Item>
-                            <Link to='/images/create'>Create</Link>
+                            <Link to='/images/build'>Build</Link>
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu.Item>
@@ -37,7 +37,7 @@ export default class Sidebar extends Component {
                     <Menu.Header>Network</Menu.Header>
                     <Menu.Menu>
                         <Menu.Item>
-                            <Link to='/network/list'>List</Link>
+                            <Link to='/network'>List</Link>
                         </Menu.Item>
                         <Menu.Item>
                             <Link to='/network/create'>Create</Link>

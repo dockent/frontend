@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {Breadcrumb, Button, Checkbox, Container, Form, Header} from "semantic-ui-react";
-import {Link} from "react-router-dom";
+import {Breadcrumb, Button, Checkbox, Container, Form, Header, Message} from "semantic-ui-react";
+import {Link, withRouter} from "react-router-dom";
 import * as ContainerCreateActions from '../../../actions/Containers/Create';
 import {bindActionCreators} from "redux";
+import _ from 'lodash';
 
 class Create extends Component {
     constructor(props) {
@@ -39,10 +40,14 @@ class Create extends Component {
     }
 
     submit() {
-        this.props.actions.createContainer(this.state.model);
+        this.props.actions.createContainer(this.props.history, this.state.model);
     }
 
     render() {
+        let errors = [];
+        _.each(this.props.errors, (value) => {
+            errors = _.unionWith(errors, value);
+        });
         return (<Container>
             <Breadcrumb>
                 <Breadcrumb.Section><Link to='/'>Home</Link></Breadcrumb.Section>
@@ -52,7 +57,8 @@ class Create extends Component {
                 <Breadcrumb.Section active>Create</Breadcrumb.Section>
             </Breadcrumb>
             <Header size='large'>Create container</Header>
-            <Form onSubmit={this.submit}>
+            <Form onSubmit={this.submit} error={this.props.errors.length !== 0}>
+                <Message error header='Errors happened' list={errors}/>
                 <Form.Field>
                     <Form.Input label='Image' type='text' placeholder='ubuntu:latest' name='Image'
                                 value={this.state.model.Image} onChange={this.handleChange}/>
@@ -75,8 +81,10 @@ class Create extends Component {
     }
 }
 
-function mapStateToProps() {
-    return {};
+function mapStateToProps(state) {
+    return {
+        errors: state.containerCreate.errors
+    };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -85,4 +93,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Create);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Create));

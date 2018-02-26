@@ -1,25 +1,25 @@
-import {DASHBOARD_REQUEST, DASHBOARD_REQUEST_FAIL, DASHBOARD_REQUEST_SUCCESS} from "../constants/Dashboard";
-import {Dashboard} from "../providers/UrlProvider";
+import {Images} from "../../providers/UrlProvider";
+import {IMAGES_LIST_FAIL, IMAGES_LIST_REQUEST, IMAGES_LIST_SUCCESS} from "../../constants/Images";
 
 /**
  * @returns {function(*=)}
  */
 export function requestData() {
     return (dispatch) => {
-        dispatch({type: DASHBOARD_REQUEST});
-        fetch(Dashboard.url)
+        dispatch({type: IMAGES_LIST_REQUEST});
+        fetch(Images.list)
             .then((response) => {
                 response.json()
                     .then((data) => {
                         dispatch({
-                            type: DASHBOARD_REQUEST_SUCCESS,
+                            type: IMAGES_LIST_SUCCESS,
                             payload: data
                         });
                     });
             })
             .catch((error) => {
                 dispatch({
-                    type: DASHBOARD_REQUEST_FAIL,
+                    type: IMAGES_LIST_FAIL,
                     payload: error
                 });
             });

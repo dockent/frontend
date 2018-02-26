@@ -4,6 +4,9 @@ import thunkMiddleware from 'redux-thunk';
 import {createLogger} from "redux-logger";
 import {redirect} from "../middlewares/redirect";
 
+/**
+ * @returns {Store<any> | Store<StoreEnhancer<S>> | *}
+ */
 export default function configureStore() {
     return compose(
         applyMiddleware(thunkMiddleware),

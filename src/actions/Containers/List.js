@@ -9,6 +9,9 @@ import {Containers} from "../../providers/UrlProvider";
 import _ from 'lodash';
 import {notify} from "react-notify-toast";
 
+/**
+ * @returns {function(*=)}
+ */
 export function requestData() {
     return (dispatch) => {
         dispatch({type: CONTAINERS_LIST_REQUEST});
@@ -31,6 +34,10 @@ export function requestData() {
     };
 }
 
+/**
+ * @param {Object[]} selected
+ * @returns {function(*=)}
+ */
 export function startContainers(selected) {
     return (dispatch) => {
         dispatch({type: CONTAINERS_START_REQUEST, payload: selected});
@@ -61,6 +68,10 @@ export function startContainers(selected) {
     };
 }
 
+/**
+ * @param {Object[]} selected
+ * @returns {function(*=)}
+ */
 export function restartContainers(selected) {
     return (dispatch) => {
         dispatch({type: CONTAINERS_RESTART_REQUEST, payload: selected});
@@ -91,6 +102,10 @@ export function restartContainers(selected) {
     };
 }
 
+/**
+ * @param {Object[]} selected
+ * @returns {function(*=)}
+ */
 export function stopContainers(selected) {
     return (dispatch) => {
         dispatch({type: CONTAINERS_STOP_REQUEST, payload: selected});
@@ -121,6 +136,10 @@ export function stopContainers(selected) {
     };
 }
 
+/**
+ * @param {Object[]} selected
+ * @returns {function(*=)}
+ */
 export function removeContainers(selected) {
     return (dispatch) => {
         dispatch({type: CONTAINERS_REMOVE_REQUEST, payload: selected});
