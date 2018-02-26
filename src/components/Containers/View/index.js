@@ -3,15 +3,61 @@ import {connect} from "react-redux";
 import {Breadcrumb, Container, Header, Tab} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {bindActionCreators} from "redux";
-import * as ContainerEditActions from '../../../actions/Containers/Inspect';
+import * as ContainerInspectActions from '../../../actions/Containers/Inspect';
+import * as ContainersListActions from '../../../actions/Containers/List';
 import ContainerInspect from "./ContainerInspect";
 import NetworkSettings from "./NetworkSettings";
 import Configuration from "./Configuration";
 import State from "./State";
 import Mounts from "./Mounts";
 import ListOfProcesses from "./ListOfProcesses";
+import {ContainerState} from "../../../enums/ContainerState";
+import Toolbar from "../../Toolbar";
 
 class View extends Component {
+    constructor(props) {
+        super(props);
+        let toolbarConfig = {
+            start: {
+                label: 'Start',
+                icon: 'play',
+                action: () => {
+                    this.props.listActions.startContainers({0: this.props.inspect.model});
+                    this.props.actions.inspectContainer(this.props.match.params.id);
+                },
+                isActive: () => (this.props.inspect.model.State.Status !== ContainerState.RUNNING)
+            },
+            restart: {
+                label: 'Restart',
+                icon: 'repeat',
+                action: () => {
+                    this.props.listActions.restartContainers({0: this.props.inspect.model});
+                },
+                isActive: () => (this.props.inspect.model.State.Status === ContainerState.RUNNING)
+            },
+            stop: {
+                label: 'Stop',
+                icon: 'stop',
+                action: () => {
+                    this.props.listActions.stopContainers({0: this.props.inspect.model});
+                },
+                isActive: () => (this.props.inspect.model.State.Status === ContainerState.RUNNING)
+            },
+            remove: {
+                label: 'Remove',
+                icon: 'trash',
+                action: () => {
+                    this.props.listActions.removeContainers({0: this.props.inspect.model});
+                    this.props.actions.inspectContainer(this.props.match.params.id);
+                },
+                isActive: () => (true)
+            }
+        };
+        this.state = {
+            toolbarConfig: toolbarConfig
+        };
+    }
+
     componentWillMount() {
         this.props.actions.inspectContainer(this.props.match.params.id);
     }
@@ -53,6 +99,7 @@ class View extends Component {
                 <Breadcrumb.Divider/>
                 <Breadcrumb.Section active>{this.props.inspect.model.Name}</Breadcrumb.Section>
             </Breadcrumb>
+            <Toolbar toolbarConfig={this.state.toolbarConfig}/>
             <Header size='large'>{this.props.inspect.model.Name}</Header>
             <Tab menu={{secondary: true, pointing: true}} panes={panes}/>
         </Container>);
@@ -67,7 +114,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(ContainerEditActions, dispatch)
+        actions: bindActionCreators(ContainerInspectActions, dispatch),
+        listActions: bindActionCreators(ContainersListActions, dispatch)
     };
 }
 

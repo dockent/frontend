@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import _ from 'lodash';
 import './index.css';
 import Toolbar from "../Toolbar";
+import {ContainerState} from "../../enums/ContainerState";
 
 class Containers extends Component {
     constructor(props) {
@@ -19,9 +20,7 @@ class Containers extends Component {
                 action: () => {
                     this.props.actions.startContainers(this.state.selectedItems);
                 },
-                isActive: () => {
-                    return _.toArray(this.state.selectedItems).length > 0;
-                }
+                isActive: () => (_.filter(_.toArray(this.state.selectedItems), (value) => (value.State !== ContainerState.RUNNING)).length > 0)
             },
             restart: {
                 label: 'Restart',
@@ -29,7 +28,7 @@ class Containers extends Component {
                 action: () => {
                     this.props.actions.restartContainers(this.state.selectedItems);
                 },
-                isActive: () => (true)
+                isActive: () => (_.filter(_.toArray(this.state.selectedItems), (value) => (value.State === ContainerState.RUNNING)).length > 0)
             },
             stop: {
                 label: 'Stop',
@@ -37,7 +36,7 @@ class Containers extends Component {
                 action: () => {
                     this.props.actions.stopContainers(this.state.selectedItems);
                 },
-                isActive: () => (true)
+                isActive: () => (_.filter(_.toArray(this.state.selectedItems), (value) => (value.State === ContainerState.RUNNING)).length > 0)
             },
             remove: {
                 label: 'Remove',
@@ -45,7 +44,7 @@ class Containers extends Component {
                 action: () => {
                     this.props.actions.removeContainers(this.state.selectedItems);
                 },
-                isActive: () => (true)
+                isActive: () => (_.toArray(this.state.selectedItems).length > 0)
             }
         };
         this.state = {
@@ -75,11 +74,10 @@ class Containers extends Component {
         }
     }
 
-    mapStateToColor(state) {
-        let map = {
-            running: 'green',
-            exited: 'red'
-        };
+    static mapStateToColor(state) {
+        let map = {};
+        map[ContainerState.RUNNING] = 'green';
+        map[ContainerState.EXITED] = 'red';
         if (!(state in map)) {
             return 'grey';
         }
@@ -93,7 +91,7 @@ class Containers extends Component {
                 <Breadcrumb.Divider/>
                 <Breadcrumb.Section active>Containers</Breadcrumb.Section>
             </Breadcrumb>
-            <Toolbar toolbarConfig={this.state.toolbarConfig} selectedItems={this.state.selectedItems}/>
+            <Toolbar toolbarConfig={this.state.toolbarConfig}/>
             <Table celled striped>
                 <Table.Header>
                     <Table.Row>
@@ -108,7 +106,7 @@ class Containers extends Component {
                         <Table.Cell>
                             <Header as='h4'>
                                 <Header.Content>
-                                    <Label circular color={this.mapStateToColor(value.State)} empty/>
+                                    <Label circular color={Containers.mapStateToColor(value.State)} empty/>
                                     <Link className='header-link'
                                           to={`/containers/view/${value.Id}`}>{value.Names.join('; ')}</Link>
                                 </Header.Content>
