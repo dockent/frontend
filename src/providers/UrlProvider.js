@@ -68,4 +68,15 @@ export class Images {
     static get list() {
         return `${baseUrl}/image`;
     }
+
+    /**
+     * @returns {string}
+     */
+    static get remove() {
+        return `${baseUrl}/image/remove`;
+    }
+
+    static get forceRemove() {
+        return `${baseUrl}/image/forceRemove`;
+    }
 }

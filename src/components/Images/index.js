@@ -6,12 +6,30 @@ import {Breadcrumb, Checkbox, Container, Header, Table} from "semantic-ui-react"
 import {Link} from "react-router-dom";
 import _ from 'lodash';
 import {formatBytes, formatDate} from "../../helper";
+import Toolbar from "../Toolbar";
 
 class Images extends Component {
     constructor(props) {
         super(props);
         this.checkboxChangeState = this.checkboxChangeState.bind(this);
-        let toolbarConfig = {};
+        let toolbarConfig = {
+            remove: {
+                label: 'Remove',
+                icon: 'trash',
+                action: () => {
+                    this.props.actions.removeImages(this.state.selectedItems);
+                },
+                isActive: () => (_.toArray(this.state.selectedItems).length > 0)
+            },
+            forceRemove: {
+                label: 'Force remove',
+                icon: 'trash',
+                action: () => {
+                    this.props.actions.forceRemoveImages(this.state.selectedItems);
+                },
+                isActive: () => (_.toArray(this.state.selectedItems).length > 0)
+            }
+        };
         this.state = {
             toolbarConfig: toolbarConfig,
             selectedItems: {}
@@ -46,7 +64,7 @@ class Images extends Component {
                 <Breadcrumb.Divider/>
                 <Breadcrumb.Section active>Images</Breadcrumb.Section>
             </Breadcrumb>
-            {/*<Toolbar toolbarConfig={this.state.toolbarConfig} selectedItems={this.state.selectedItems}/>*/}
+            <Toolbar toolbarConfig={this.state.toolbarConfig} selectedItems={this.state.selectedItems}/>
             <Table celled striped>
                 <Table.Header>
                     <Table.Row>
