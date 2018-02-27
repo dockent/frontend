@@ -1,17 +1,12 @@
-import {CONTAINER_CREATE_FAIL, CONTAINER_CREATE_REQUEST, CONTAINER_CREATE_SUCCESS} from "../../constants/Containers";
-import {Containers} from "../../providers/UrlProvider";
+import {BUILDER_SUBMIT_FAIL, BUILDER_SUBMIT_REQUEST, BUILDER_SUBMIT_SUCCESS} from "../constants/Builder";
+import {Builder} from "../providers/UrlProvider";
 import {notify} from "react-notify-toast";
-import {ROUTING} from "../../constants/Routing";
+import {ROUTING} from "../constants/Routing";
 
-/**
- * @param {history} history
- * @param {Object} data
- * @returns {function(*=)}
- */
-export function createContainer(history, data) {
+export function builderRequest(history, data) {
     return (dispatch) => {
-        dispatch({type: CONTAINER_CREATE_REQUEST, payload: data});
-        fetch(Containers.create, {
+        dispatch({type: BUILDER_SUBMIT_REQUEST, payload: data});
+        fetch(Builder.url, {
             method: 'POST',
             body: JSON.stringify(data)
         })
@@ -21,28 +16,27 @@ export function createContainer(history, data) {
                         switch (data.status) {
                             case 'success':
                                 dispatch({
-                                    type: CONTAINER_CREATE_SUCCESS,
+                                    type: BUILDER_SUBMIT_SUCCESS,
                                     payload: data
                                 });
                                 notify.show(data.message, 'success');
                                 dispatch({
                                     type: ROUTING,
-                                    payload: {history: history, url: '/containers'}
+                                    payload: {history: history, url: '/images'}
                                 });
                                 break;
                             default:
                             case 'error':
                                 dispatch({
-                                    type: CONTAINER_CREATE_FAIL,
+                                    type: BUILDER_SUBMIT_FAIL,
                                     payload: data
                                 });
-                                break;
                         }
                     });
             })
             .catch((error) => {
                 dispatch({
-                    type: CONTAINER_CREATE_FAIL,
+                    type: BUILDER_SUBMIT_FAIL,
                     payload: error
                 });
             });

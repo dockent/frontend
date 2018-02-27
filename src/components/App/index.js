@@ -10,6 +10,8 @@ import View from "../Containers/View";
 import Create from '../Containers/Create'
 import Images from "../Images";
 import Build from '../Images/Build';
+import Builder from '../Builder';
+import Network from "../Network";
 
 class App extends Component {
     render() {
@@ -17,7 +19,7 @@ class App extends Component {
             <Router>
                 <Container className='main-container'>
                     <Header as='h2'>
-                        <Icon name='terminal' />
+                        <Icon name='terminal'/>
                         <Header.Content>Dockent</Header.Content>
                     </Header>
                     <Grid>
@@ -31,9 +33,11 @@ class App extends Component {
                             <Route exact path='/containers/create' component={Create}/>
                             <Route exact path='/images' component={Images}/>
                             <Route exact path='/images/build' component={Build}/>
+                            <Route exact path='/builder' component={Builder}/>
+                            <Route exact path='/network' component={Network}/>
                         </Grid.Column>
                     </Grid>
-                    <Notifications />
+                    <Notifications/>
                 </Container>
             </Router>
         );

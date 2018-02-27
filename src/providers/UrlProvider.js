@@ -97,3 +97,28 @@ export class Images {
         return `${baseUrl}/builder/buildByDockerfileBody`;
     }
 }
+
+export class Builder {
+    /**
+     * @returns {string}
+     */
+    static get url() {
+        return `${baseUrl}/builder`;
+    }
+}
+
+export class Network {
+    /**
+     * @returns {string}
+     */
+    static get list() {
+        return `${baseUrl}/network`;
+    }
+
+    /**
+     * @returns {string}
+     */
+    static get remove() {
+        return `${baseUrl}/network/remove`;
+    }
+}
