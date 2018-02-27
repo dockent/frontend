@@ -76,7 +76,24 @@ export class Images {
         return `${baseUrl}/image/remove`;
     }
 
+    /**
+     * @returns {string}
+     */
     static get forceRemove() {
         return `${baseUrl}/image/forceRemove`;
+    }
+
+    /**
+     * @returns {string}
+     */
+    static get buildByDockerfilePath() {
+        return `${baseUrl}/builder/buildByDockerfilePath`;
+    }
+
+    /**
+     * @returns {string}
+     */
+    static get buildByDockerfileBody() {
+        return `${baseUrl}/builder/buildByDockerfileBody`;
     }
 }

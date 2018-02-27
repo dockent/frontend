@@ -9,6 +9,7 @@ import Notifications from 'react-notify-toast';
 import View from "../Containers/View";
 import Create from '../Containers/Create'
 import Images from "../Images";
+import Build from '../Images/Build';
 
 class App extends Component {
     render() {
@@ -29,7 +30,7 @@ class App extends Component {
                             <Route exact path='/containers/view/:id' component={View}/>
                             <Route exact path='/containers/create' component={Create}/>
                             <Route exact path='/images' component={Images}/>
-                            <Route exact path='/images/build' component={Images}/>
+                            <Route exact path='/images/build' component={Build}/>
                         </Grid.Column>
                     </Grid>
                     <Notifications />
