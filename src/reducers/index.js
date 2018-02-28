@@ -7,6 +7,7 @@ import imagesList from "./imagesList";
 import imageBuild from "./imageBuild";
 import builder from "./builder";
 import networkList from "./networkList";
+import networkInspect from "./networkInspect";
 
 export const rootReducer = combineReducers({
     dashboard,
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
     imagesList,
     imageBuild,
     builder,
-    networkList
+    networkList,
+    networkInspect
 });

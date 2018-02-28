@@ -121,4 +121,12 @@ export class Network {
     static get remove() {
         return `${baseUrl}/network/remove`;
     }
+
+    /**
+     * @param {int} id
+     * @returns {string}
+     */
+    static inspect(id) {
+        return `${baseUrl}/network/view/${id}`;
+    }
 }

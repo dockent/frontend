@@ -12,6 +12,7 @@ import Images from "../Images";
 import Build from '../Images/Build';
 import Builder from '../Builder';
 import Network from "../Network";
+import NetworkView from '../Network/NetworkView';
 
 class App extends Component {
     render() {
@@ -35,6 +36,7 @@ class App extends Component {
                             <Route exact path='/images/build' component={Build}/>
                             <Route exact path='/builder' component={Builder}/>
                             <Route exact path='/network' component={Network}/>
+                            <Route exact path='/network/view/:id' component={NetworkView}/>
                         </Grid.Column>
                     </Grid>
                     <Notifications/>

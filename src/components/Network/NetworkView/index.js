@@ -3,9 +3,11 @@ import {Breadcrumb, Container, Header, Tab} from "semantic-ui-react";
 import Toolbar from "../../Toolbar";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {Network} from "../../../providers/UrlProvider";
+import {Link} from "react-router-dom";
+import * as NetworkListActions from '../../../actions/Network/List';
+import * as NetworkInspectActions from '../../../actions/Network/Inspect';
 
-class View extends Component {
+class NetworkView extends Component {
     constructor(props) {
         super(props);
         let toolbarConfig = {
@@ -28,17 +30,26 @@ class View extends Component {
     }
 
     render() {
-        const panes = [];
+        const panes = [
+            {
+                menuItem: 'Network inspect',
+                render: () => <Tab.Pane attached={false}>1</Tab.Pane>
+            },
+            {
+                menuItem: 'Containers',
+                render: () => <Tab.Pane attached={false}>2</Tab.Pane>
+            }
+        ];
         return (<Container>
             <Breadcrumb>
                 <Breadcrumb.Section><Link to='/'>Home</Link></Breadcrumb.Section>
                 <Breadcrumb.Divider/>
                 <Breadcrumb.Section><Link to='/network'>Network</Link></Breadcrumb.Section>
                 <Breadcrumb.Divider/>
-                <Breadcrumb.Section active>{this.props.inspect.model.Name}</Breadcrumb.Section>
+                <Breadcrumb.Section active>{this.props.model.Name}</Breadcrumb.Section>
             </Breadcrumb>
             <Toolbar toolbarConfig={this.state.toolbarConfig}/>
-            <Header size='large'>{this.props.inspect.model.Name}</Header>
+            <Header size='large'>{this.props.model.Name}</Header>
             <Tab menu={{secondary: true, pointing: true}} panes={panes}/>
         </Container>);
     }
@@ -46,7 +57,7 @@ class View extends Component {
 
 function mapStateToProps(state) {
     return {
-        inspect: state.networkInspect
+        model: state.networkInspect
     };
 }
 
@@ -57,4 +68,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Network);
+export default connect(mapStateToProps, mapDispatchToProps)(NetworkView);
