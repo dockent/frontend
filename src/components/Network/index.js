@@ -6,6 +6,7 @@ import {Breadcrumb, Checkbox, Container, Header, Table} from "semantic-ui-react"
 import {Link} from "react-router-dom";
 import _ from 'lodash';
 import Toolbar from "../Toolbar";
+import './index.css';
 
 class Network extends Component {
     constructor(props) {
@@ -71,7 +72,10 @@ class Network extends Component {
                         <Table.Cell><Checkbox onChange={this.checkboxChangeState} value={key}/></Table.Cell>
                         <Table.Cell>
                             <Header as='h4'>
-                                <Header.Content>{value.Name}</Header.Content>
+                                <Header.Content>
+                                    <Link className='header-link'
+                                          to={`/network/view/${value.Id}`}>{value.Name}</Link>
+                                </Header.Content>
                                 <Header.Subheader>{value.Id}</Header.Subheader>
                             </Header>
                         </Table.Cell>
