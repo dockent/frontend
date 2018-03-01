@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Menu} from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import Storage from "../../Storage";
 
 export default class Sidebar extends Component {
     render() {
@@ -44,11 +45,11 @@ export default class Sidebar extends Component {
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu.Item>
-                <Menu.Item>
+                {Storage.get('debugMode') ? (<Menu.Item>
                     <Menu.Header>
                         <Link to='/settings'>Settings</Link>
                     </Menu.Header>
-                </Menu.Item>
+                </Menu.Item>) : null}
             </Menu>
         );
     }

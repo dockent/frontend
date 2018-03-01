@@ -129,4 +129,29 @@ export class Network {
     static inspect(id) {
         return `${baseUrl}/network/view/${id}`;
     }
+
+    /**
+     * @returns {string}
+     */
+    static get create() {
+        return `${baseUrl}/network/create`;
+    }
+}
+
+export class Settings {
+    /**
+     * @returns {string}
+     */
+    static get url() {
+        return `${baseUrl}/settings`;
+    }
+}
+
+export class Application {
+    /**
+     * @returns {string}
+     */
+    static get applicationConfig() {
+        return `${baseUrl}/index/applicationConfig`;
+    }
 }

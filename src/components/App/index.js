@@ -13,6 +13,9 @@ import Build from '../Images/Build';
 import Builder from '../Builder';
 import Network from "../Network";
 import NetworkView from '../Network/NetworkView';
+import NetworkCreate from '../Network/NetworkCreate';
+import Settings from '../Settings';
+import Storage from "../../Storage";
 
 class App extends Component {
     render() {
@@ -37,6 +40,8 @@ class App extends Component {
                             <Route exact path='/builder' component={Builder}/>
                             <Route exact path='/network' component={Network}/>
                             <Route exact path='/network/view/:id' component={NetworkView}/>
+                            <Route exact path='/network/create' component={NetworkCreate}/>
+                            {Storage.get('debugMode') ? <Route exact path='/settings' component={Settings}/> : null}
                         </Grid.Column>
                     </Grid>
                     <Notifications/>

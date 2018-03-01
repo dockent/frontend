@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Breadcrumb, Button, Checkbox, Container, Form, Header, Message} from "semantic-ui-react";
 import {Link, withRouter} from "react-router-dom";
-import * as ContainerCreateActions from '../../../actions/Containers/Create';
+import * as NetworkCreateActions from '../../../actions/Network/Create';
 import {bindActionCreators} from "redux";
 import _ from 'lodash';
 
-class Create extends Component {
+class NetworkCreate extends Component {
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
@@ -14,10 +14,13 @@ class Create extends Component {
         this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this);
         this.state = {
             model: {
-                Image: '',
-                Cmd: '',
                 Name: '',
-                Start: false
+                Driver: '',
+                CheckDuplicate: false,
+                Attachable: false,
+                EnableIPv6: false,
+                Internal: false,
+                Ingress: false
             }
         };
     }
@@ -39,7 +42,7 @@ class Create extends Component {
     }
 
     submit() {
-        this.props.actions.createContainer(this.props.history, this.state.model);
+        this.props.actions.createNetwork(this.props.history, this.state.model);
     }
 
     render() {
@@ -51,27 +54,39 @@ class Create extends Component {
             <Breadcrumb>
                 <Breadcrumb.Section><Link to='/'>Home</Link></Breadcrumb.Section>
                 <Breadcrumb.Divider/>
-                <Breadcrumb.Section><Link to='/containers'>Containers</Link></Breadcrumb.Section>
+                <Breadcrumb.Section><Link to='/network'>Network</Link></Breadcrumb.Section>
                 <Breadcrumb.Divider/>
                 <Breadcrumb.Section active>Create</Breadcrumb.Section>
             </Breadcrumb>
-            <Header size='large'>Create container</Header>
+            <Header size='large'>Create network</Header>
             <Form onSubmit={this.submit} error={this.props.errors.length !== 0}>
                 <Message error header='Errors happened' list={errors}/>
                 <Form.Field>
-                    <Form.Input label='Image' type='text' placeholder='ubuntu:latest' name='Image'
-                                value={this.state.model.Image} onChange={this.handleChange}/>
-                </Form.Field>
-                <Form.Field>
-                    <Form.Input label='Cmd' type='text' placeholder='bash' name='Cmd' value={this.state.model.Cmd}
-                                onChange={this.handleChange}/>
-                </Form.Field>
-                <Form.Field>
-                    <Form.Input label='Name' type='text' placeholder='new container' name='Name'
+                    <Form.Input label='Name' type='text' name='Name'
                                 value={this.state.model.Name} onChange={this.handleChange}/>
                 </Form.Field>
                 <Form.Field>
-                    <Checkbox label='Start after creating' name='Start' checked={this.state.model.Start}
+                    <Form.Input label='Driver' type='text' placeholder='bridge' name='Driver' value={this.state.model.Driver}
+                                onChange={this.handleChange}/>
+                </Form.Field>
+                <Form.Field>
+                    <Checkbox label='Check duplicate' name='CheckDuplicate' checked={this.state.model.CheckDuplicate}
+                              onChange={this.handleChangeCheckbox}/>
+                </Form.Field>
+                <Form.Field>
+                    <Checkbox label='Attachable' name='Attachable' checked={this.state.model.Attachable}
+                              onChange={this.handleChangeCheckbox}/>
+                </Form.Field>
+                <Form.Field>
+                    <Checkbox label='Enable IPv6' name='EnableIPv6' checked={this.state.model.EnableIPv6}
+                              onChange={this.handleChangeCheckbox}/>
+                </Form.Field>
+                <Form.Field>
+                    <Checkbox label='Internal' name='Internal' checked={this.state.model.Internal}
+                              onChange={this.handleChangeCheckbox}/>
+                </Form.Field>
+                <Form.Field>
+                    <Checkbox label='Ingress' name='Ingress' checked={this.state.model.Ingress}
                               onChange={this.handleChangeCheckbox}/>
                 </Form.Field>
                 <Button type='submit'>Submit</Button>
@@ -82,14 +97,14 @@ class Create extends Component {
 
 function mapStateToProps(state) {
     return {
-        errors: state.containerCreate.errors
+        errors: state.networkCreate.errors
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(ContainerCreateActions, dispatch)
+        actions: bindActionCreators(NetworkCreateActions, dispatch)
     };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Create));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NetworkCreate));

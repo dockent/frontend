@@ -6,6 +6,8 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import * as NetworkListActions from '../../../actions/Network/List';
 import * as NetworkInspectActions from '../../../actions/Network/Inspect';
+import NetworkInspect from "./NetworkInspect";
+import Containers from "./Containers";
 
 class NetworkView extends Component {
     constructor(props) {
@@ -33,11 +35,11 @@ class NetworkView extends Component {
         const panes = [
             {
                 menuItem: 'Network inspect',
-                render: () => <Tab.Pane attached={false}>1</Tab.Pane>
+                render: () => <Tab.Pane attached={false}><NetworkInspect model={this.props.model}/></Tab.Pane>
             },
             {
                 menuItem: 'Containers',
-                render: () => <Tab.Pane attached={false}>2</Tab.Pane>
+                render: () => <Tab.Pane attached={false}><Containers model={this.props.model}/></Tab.Pane>
             }
         ];
         return (<Container>
