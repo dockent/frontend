@@ -19,6 +19,10 @@ class Containers extends Component {
                 icon: 'play',
                 action: () => {
                     this.props.actions.startContainers(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.filter(_.toArray(this.state.selectedItems), (value) => (value.State !== ContainerState.RUNNING)).length > 0)
             },
@@ -27,6 +31,10 @@ class Containers extends Component {
                 icon: 'repeat',
                 action: () => {
                     this.props.actions.restartContainers(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.filter(_.toArray(this.state.selectedItems), (value) => (value.State === ContainerState.RUNNING)).length > 0)
             },
@@ -35,6 +43,10 @@ class Containers extends Component {
                 icon: 'stop',
                 action: () => {
                     this.props.actions.stopContainers(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.filter(_.toArray(this.state.selectedItems), (value) => (value.State === ContainerState.RUNNING)).length > 0)
             },
@@ -43,6 +55,10 @@ class Containers extends Component {
                 icon: 'trash',
                 action: () => {
                     this.props.actions.removeContainers(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.toArray(this.state.selectedItems).length > 0)
             }
@@ -102,7 +118,10 @@ class Containers extends Component {
                 </Table.Header>
                 <Table.Body>
                     {_.map(this.props.list, (value, key) => (<Table.Row key={key}>
-                        <Table.Cell><Checkbox onChange={this.checkboxChangeState} value={key}/></Table.Cell>
+                        <Table.Cell>
+                            <Checkbox onChange={this.checkboxChangeState} value={key}
+                                      checked={key in this.state.selectedItems}/>
+                        </Table.Cell>
                         <Table.Cell>
                             <Header as='h4'>
                                 <Header.Content>

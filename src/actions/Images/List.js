@@ -55,7 +55,6 @@ export function removeImages(selected) {
                             type: IMAGE_REMOVE_SUCCESS,
                             payload: data
                         });
-                        requestData();
                     });
             })
             .catch((error) => {
@@ -89,7 +88,6 @@ export function forceRemoveImages(selected) {
                             type: IMAGE_FORCE_REMOVE_SUCCESS,
                             payload: data
                         });
-                        requestData();
                     });
             })
             .catch((error) => {

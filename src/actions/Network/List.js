@@ -52,7 +52,6 @@ export function removeNetwork(selected) {
                             type: NETWORK_REMOVE_SUCCESS,
                             payload: data
                         });
-                        requestData();
                     });
             })
             .catch((error) => {

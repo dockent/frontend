@@ -18,6 +18,10 @@ class Network extends Component {
                 icon: 'trash',
                 action: () => {
                     this.props.actions.removeNetwork(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.toArray(this.state.selectedItems).length > 0)
             }
@@ -69,7 +73,10 @@ class Network extends Component {
                 </Table.Header>
                 <Table.Body>
                     {_.map(this.props.list, (value, key) => (<Table.Row key={key}>
-                        <Table.Cell><Checkbox onChange={this.checkboxChangeState} value={key}/></Table.Cell>
+                        <Table.Cell>
+                            <Checkbox onChange={this.checkboxChangeState} value={key}
+                                      checked={key in this.state.selectedItems}/>
+                        </Table.Cell>
                         <Table.Cell>
                             <Header as='h4'>
                                 <Header.Content>
