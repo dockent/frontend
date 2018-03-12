@@ -25,19 +25,19 @@ export default class State extends Component {
             <List.Item>
                 <List.Content>
                     <List.Header>OOM killed</List.Header>
-                    {this.props.model.State.OOMKilled}
+                    {this.props.model.State.OOMKilled ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
             <List.Item>
                 <List.Content>
                     <List.Header>Dead</List.Header>
-                    {this.props.model.State.Dead}
+                    {this.props.model.State.Dead ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
             <List.Item>
                 <List.Content>
                     <List.Header>Paused</List.Header>
-                    {this.props.model.State.Paused}
+                    {this.props.model.State.Paused ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
             <List.Item>
@@ -49,13 +49,13 @@ export default class State extends Component {
             <List.Item>
                 <List.Content>
                     <List.Header>Restarting</List.Header>
-                    {this.props.model.State.Restarting}
+                    {this.props.model.State.Restarting ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
             <List.Item>
                 <List.Content>
                     <List.Header>Running</List.Header>
-                    {this.props.model.State.Running}
+                    {this.props.model.State.Running ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
             <List.Item>

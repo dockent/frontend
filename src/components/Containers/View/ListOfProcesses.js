@@ -5,7 +5,7 @@ import _ from 'lodash';
 export default class ListOfProcesses extends Component {
     render() {
         return (
-            <Table basic='very' celled collapsing>
+            <Table celled>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>PID</Table.HeaderCell>

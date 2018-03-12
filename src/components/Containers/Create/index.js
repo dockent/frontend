@@ -67,7 +67,7 @@ class Create extends Component {
                                 onChange={this.handleChange}/>
                 </Form.Field>
                 <Form.Field>
-                    <Form.Input label='Name' type='text' placeholder='new container' name='Name'
+                    <Form.Input label='Name' type='text' placeholder='new_container' name='Name'
                                 value={this.state.model.Name} onChange={this.handleChange}/>
                 </Form.Field>
                 <Form.Field>

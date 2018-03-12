@@ -25,7 +25,7 @@ export default class NetworkSettings extends Component {
             <List.Item>
                 <List.Content>
                     <List.Header>Hairpin mode</List.Header>
-                    {this.props.model.NetworkSettings.HairpinMode}
+                    {this.props.model.NetworkSettings.HairpinMode ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
             <List.Item>

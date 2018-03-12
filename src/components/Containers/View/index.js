@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Breadcrumb, Container, Header, Tab} from "semantic-ui-react";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {bindActionCreators} from "redux";
 import * as ContainerInspectActions from '../../../actions/Containers/Inspect';
 import * as ContainersListActions from '../../../actions/Containers/List';
+import * as RedirectAction from '../../../actions/GlobalRedirectAction';
 import ContainerInspect from "./ContainerInspect";
 import NetworkSettings from "./NetworkSettings";
 import Configuration from "./Configuration";
@@ -48,7 +49,7 @@ class View extends Component {
                 icon: 'trash',
                 action: () => {
                     this.props.listActions.removeContainers({0: this.props.inspect.model});
-                    this.props.actions.inspectContainer(this.props.match.params.id);
+                    this.props.redirect.redirect(this.props.history, '/containers');
                 },
                 isActive: () => (true)
             }
@@ -115,8 +116,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(ContainerInspectActions, dispatch),
-        listActions: bindActionCreators(ContainersListActions, dispatch)
+        listActions: bindActionCreators(ContainersListActions, dispatch),
+        redirect: bindActionCreators(RedirectAction, dispatch)
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(View);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(View));
