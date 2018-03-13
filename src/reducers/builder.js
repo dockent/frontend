@@ -7,6 +7,7 @@ const initialState = {
 export default function builder(state = initialState, action) {
     switch (action.type) {
         case BUILDER_SUBMIT_SUCCESS:
+            return {...state, errors: [], ...action.payload};
         case BUILDER_SUBMIT_FAIL:
             return {...state, ...action.payload};
         default:

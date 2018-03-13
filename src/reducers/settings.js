@@ -11,6 +11,7 @@ const initialState = {
 export default function settings(state = initialState, action) {
     switch (action.type) {
         case SETTINGS_SAVE_SUCCESS:
+            return {...state, errors: [], ...action.payload};
         case SETTINGS_SAVE_FAIL:
         case SETTINGS_GET_SUCCESS:
         case SETTINGS_GET_FAIL:

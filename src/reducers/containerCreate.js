@@ -7,6 +7,7 @@ const initialState = {
 export default function containerCreate(state = initialState, action) {
     switch (action.type) {
         case CONTAINER_CREATE_SUCCESS:
+            return {...state, errors: [], ...action.payload};
         case CONTAINER_CREATE_FAIL:
             return {...state, ...action.payload};
         default:
