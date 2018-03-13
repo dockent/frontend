@@ -22,3 +22,16 @@ export function formatDate(timestamp) {
     date.setTime(timestamp * 1000);
     return date.toUTCString();
 }
+
+/**
+ * @param {string} str
+ * @returns {string}
+ */
+export function shortString(str) {
+    if (str.length > 10) {
+        let first = str.substr(0, 5);
+        let second = str.substr(-5);
+        return `${first}...${second}`;
+    }
+    return str;
+}

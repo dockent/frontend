@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import {Table} from "semantic-ui-react";
 import _ from 'lodash';
 import {Link} from "react-router-dom";
+import {shortString} from "../../../helper";
 
 export default class Containers extends Component {
     render() {
         return (
-            <Table basic='very' celled collapsing>
+            <Table celled>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>Name</Table.HeaderCell>
@@ -19,7 +20,7 @@ export default class Containers extends Component {
                 <Table.Body>
                     {_.map(this.props.model.Containers, (value, key) => (<Table.Row key={key}>
                         <Table.Cell><Link to={`/containers/view/${key}`}>{value.Name}</Link></Table.Cell>
-                        <Table.Cell><Link to={`/containers/view/${key}`}>{value.EndpointID}</Link></Table.Cell>
+                        <Table.Cell><Link to={`/containers/view/${key}`}>{shortString(value.EndpointID)}</Link></Table.Cell>
                         <Table.Cell>{value.MacAddress}</Table.Cell>
                         <Table.Cell>{value.IPv4Address}</Table.Cell>
                         <Table.Cell>{value.IPv6Address}</Table.Cell>

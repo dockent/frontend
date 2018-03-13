@@ -3,9 +3,10 @@ import {Breadcrumb, Container, Header, Tab} from "semantic-ui-react";
 import Toolbar from "../../Toolbar";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import * as NetworkListActions from '../../../actions/Network/List';
 import * as NetworkInspectActions from '../../../actions/Network/Inspect';
+import * as RedirectAction from '../../../actions/GlobalRedirectAction';
 import NetworkInspect from "./NetworkInspect";
 import Containers from "./Containers";
 
@@ -17,7 +18,8 @@ class NetworkView extends Component {
                 label: 'Remove',
                 icon: 'trash',
                 action: () => {
-                    this.props.listActions.removeNetwork({0: this.state.selectedItems});
+                    this.props.listActions.removeNetwork({0: this.props.model});
+                    this.props.redirect.redirect(this.props.history, '/network');
                 },
                 isActive: () => (true)
             }
@@ -66,8 +68,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(NetworkInspectActions, dispatch),
-        listActions: bindActionCreators(NetworkListActions, dispatch)
+        listActions: bindActionCreators(NetworkListActions, dispatch),
+        redirect: bindActionCreators(RedirectAction, dispatch)
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NetworkView);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NetworkView));

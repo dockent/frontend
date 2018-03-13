@@ -37,25 +37,25 @@ export default class NetworkInspect extends Component {
             <List.Item>
                 <List.Content>
                     <List.Header>Enable IPv6</List.Header>
-                    {this.props.model.EnableIPv6}
+                    {this.props.model.EnableIPv6 ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
             <List.Item>
                 <List.Content>
                     <List.Header>Internal</List.Header>
-                    {this.props.model.Internal}
+                    {this.props.model.Internal ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
             <List.Item>
                 <List.Content>
                     <List.Header>Attachable</List.Header>
-                    {this.props.model.Attachable}
+                    {this.props.model.Attachable ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
             <List.Item>
                 <List.Content>
                     <List.Header>Ingress</List.Header>
-                    {this.props.model.Ingress}
+                    {this.props.model.Ingress ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
         </List>);
