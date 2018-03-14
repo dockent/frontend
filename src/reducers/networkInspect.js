@@ -6,6 +6,11 @@ const initialState = {
     }
 };
 
+/**
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {Object}
+ */
 export default function networkInspect(state = initialState, action) {
     switch (action.type) {
         case NETWORK_INSPECT_SUCCESS:

@@ -5,6 +5,9 @@ import {Link} from "react-router-dom";
 import {shortString} from "../../../helper";
 
 export default class Containers extends Component {
+    /**
+     * @returns {*}
+     */
     render() {
         return (
             <Table celled>

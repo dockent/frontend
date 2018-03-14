@@ -3,6 +3,9 @@ import {Table} from "semantic-ui-react";
 import _ from 'lodash';
 
 export default class ListOfProcesses extends Component {
+    /**
+     * @returns {*}
+     */
     render() {
         return (
             <Table celled>

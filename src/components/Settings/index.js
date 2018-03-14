@@ -7,6 +7,9 @@ import {bindActionCreators} from "redux";
 import _ from 'lodash';
 
 class Settings extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
@@ -19,6 +22,11 @@ class Settings extends Component {
         };
     }
 
+    /**
+     * @param {Event} e
+     * @param {string} name
+     * @param {string} value
+     */
     handleChange(e, {name, value}) {
         let model = this.state.model;
         model[name] = value;
@@ -35,6 +43,9 @@ class Settings extends Component {
         this.props.actions.getSettings();
     }
 
+    /**
+     * @param {Object} nextProps
+     */
     componentWillReceiveProps(nextProps) {
         if ('model' in nextProps) {
             this.setState({
@@ -43,6 +54,9 @@ class Settings extends Component {
         }
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         let errors = [];
         _.each(this.props.errors, (value) => {

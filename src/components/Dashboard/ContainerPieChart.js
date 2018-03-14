@@ -33,6 +33,9 @@ export default class ContainerPieChart extends Component {
         });
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         return (<canvas id='container-pie-chart' width={400} height={400}/>);
     }

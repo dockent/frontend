@@ -4,6 +4,11 @@ const initialState = {
     errors: []
 };
 
+/**
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {Object}
+ */
 export default function builder(state = initialState, action) {
     switch (action.type) {
         case BUILDER_SUBMIT_SUCCESS:

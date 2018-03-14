@@ -3,6 +3,9 @@ import {List} from "semantic-ui-react";
 import './index.css';
 
 export default class ContainerInspect extends Component {
+    /**
+     * @returns {*}
+     */
     render() {
         return (<List divided relaxed>
             <List.Item>

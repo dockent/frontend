@@ -16,6 +16,9 @@ import {ContainerState} from "../../../enums/ContainerState";
 import Toolbar from "../../Toolbar";
 
 class View extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
         let toolbarConfig = {
@@ -63,6 +66,9 @@ class View extends Component {
         this.props.actions.inspectContainer(this.props.match.params.id);
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         const panes = [
             {

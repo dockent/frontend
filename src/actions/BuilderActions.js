@@ -3,6 +3,12 @@ import {Builder} from "../providers/UrlProvider";
 import {notify} from "react-notify-toast";
 import {ROUTING} from "../constants/Routing";
 
+/**
+ *
+ * @param {history} history
+ * @param {Object} data
+ * @returns {function(*=)}
+ */
 export function builderRequest(history, data) {
     return (dispatch) => {
         dispatch({type: BUILDER_SUBMIT_REQUEST, payload: data});

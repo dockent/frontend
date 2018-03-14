@@ -18,6 +18,9 @@ import Settings from '../Settings';
 import Storage from "../../Storage";
 
 class App extends Component {
+    /**
+     * @returns {*}
+     */
     render() {
         return (
             <Router>

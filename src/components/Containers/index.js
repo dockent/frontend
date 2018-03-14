@@ -10,6 +10,9 @@ import Toolbar from "../Toolbar";
 import {ContainerState} from "../../enums/ContainerState";
 
 class Containers extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
         this.checkboxChangeState = this.checkboxChangeState.bind(this);
@@ -73,6 +76,10 @@ class Containers extends Component {
         this.props.actions.requestData();
     }
 
+    /**
+     * @param {Event} event
+     * @param {Object} data
+     */
     checkboxChangeState(event, data) {
         if (data.checked && !(data.value in this.state.selectedItems)) {
             let state = this.state.selectedItems;
@@ -90,6 +97,10 @@ class Containers extends Component {
         }
     }
 
+    /**
+     * @param {string} state
+     * @returns {string}
+     */
     static mapStateToColor(state) {
         let map = {};
         map[ContainerState.RUNNING] = 'green';
@@ -100,6 +111,9 @@ class Containers extends Component {
         return map[state];
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         return (<Container>
             <Breadcrumb>

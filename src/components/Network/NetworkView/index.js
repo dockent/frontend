@@ -11,6 +11,9 @@ import NetworkInspect from "./NetworkInspect";
 import Containers from "./Containers";
 
 class NetworkView extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
         let toolbarConfig = {
@@ -33,6 +36,9 @@ class NetworkView extends Component {
         this.props.actions.inspectNetwork(this.props.match.params.id);
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         const panes = [
             {

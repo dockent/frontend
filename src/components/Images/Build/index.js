@@ -7,6 +7,9 @@ import * as ImageBuildActions from '../../../actions/Images/Build';
 import {bindActionCreators} from "redux";
 
 class Build extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -18,6 +21,11 @@ class Build extends Component {
         };
     }
 
+    /**
+     * @param {Event} e
+     * @param {string} name
+     * @param {string} value
+     */
     handleChange(e, {name, value}) {
         let state = this.state;
         state[name] = value;
@@ -32,6 +40,9 @@ class Build extends Component {
         this.props.actions.buildByDockerfileBody(this.props.history, this.state.dockerfileBody);
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         return (<Container>
             <Breadcrumb>

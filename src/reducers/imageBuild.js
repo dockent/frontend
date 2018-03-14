@@ -8,6 +8,11 @@ const initialState = {
     errors: {}
 };
 
+/**
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {Object}
+ */
 export default function imageBuild(state = initialState, action) {
     switch (action.type) {
         case IMAGE_BUILD_BY_DOCKERFILE_PATH_SUCCESS:

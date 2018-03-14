@@ -4,6 +4,11 @@ const initialState = {
     errors: []
 };
 
+/**
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {Object}
+ */
 export default function networkCreate(state = initialState, action) {
     switch (action.type) {
         case NETWORK_CREATE_SUCCESS:

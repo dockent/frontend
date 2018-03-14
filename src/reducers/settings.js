@@ -8,6 +8,11 @@ const initialState = {
     model: {}
 };
 
+/**
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {Object}
+ */
 export default function settings(state = initialState, action) {
     switch (action.type) {
         case SETTINGS_SAVE_SUCCESS:

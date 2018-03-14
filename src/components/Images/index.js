@@ -9,6 +9,9 @@ import {formatBytes, formatDate} from "../../helper";
 import Toolbar from "../Toolbar";
 
 class Images extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
         this.checkboxChangeState = this.checkboxChangeState.bind(this);
@@ -48,6 +51,10 @@ class Images extends Component {
         this.props.actions.requestData();
     }
 
+    /**
+     * @param {Event} event
+     * @param {Object} data
+     */
     checkboxChangeState(event, data) {
         if (data.checked && !(data.value in this.state.selectedItems)) {
             let state = this.state.selectedItems;
@@ -65,6 +72,9 @@ class Images extends Component {
         }
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         return (<Container>
             <Breadcrumb>

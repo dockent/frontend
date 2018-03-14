@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {List} from "semantic-ui-react";
 
 export default class NetworkSettings extends Component {
+    /**
+     * @returns {*}
+     */
     render() {
         return (<List divided relaxed>
             <List.Item>

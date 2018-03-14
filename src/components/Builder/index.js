@@ -7,6 +7,9 @@ import {Breadcrumb, Button, Container, Form, Header, Message} from "semantic-ui-
 import * as BuilderActions from '../../actions/BuilderActions';
 
 class Builder extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -26,6 +29,11 @@ class Builder extends Component {
         };
     }
 
+    /**
+     * @param {Event} e
+     * @param {string} name
+     * @param {string} value
+     */
     handleChange(e, {name, value}) {
         let model = this.state.model;
         model[name] = value;
@@ -38,6 +46,9 @@ class Builder extends Component {
         this.props.actions.builderRequest(this.props.history, this.state.model);
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         let errors = [];
         _.each(this.props.errors, (value) => {

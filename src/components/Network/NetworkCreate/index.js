@@ -7,6 +7,9 @@ import {bindActionCreators} from "redux";
 import _ from 'lodash';
 
 class NetworkCreate extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
@@ -25,6 +28,11 @@ class NetworkCreate extends Component {
         };
     }
 
+    /**
+     * @param {Event} e
+     * @param {string} name
+     * @param {string} value
+     */
     handleChange(e, {name, value}) {
         let model = this.state.model;
         model[name] = value;
@@ -33,6 +41,11 @@ class NetworkCreate extends Component {
         });
     }
 
+    /**
+     * @param {Event} e
+     * @param {string} name
+     * @param {bool} checked
+     */
     handleChangeCheckbox(e, {name, checked}) {
         let model = this.state.model;
         model[name] = checked;
@@ -45,6 +58,9 @@ class NetworkCreate extends Component {
         this.props.actions.createNetwork(this.props.history, this.state.model);
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         let errors = [];
         _.each(this.props.errors, (value) => {
