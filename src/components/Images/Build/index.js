@@ -5,6 +5,7 @@ import {Breadcrumb, Container, Header, List, Form, Button, Message} from "semant
 import './index.css';
 import * as ImageBuildActions from '../../../actions/Images/Build';
 import {bindActionCreators} from "redux";
+import {handleChange} from "../../../mixins/handleChange";
 
 class Build extends Component {
     /**
@@ -12,24 +13,13 @@ class Build extends Component {
      */
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChange = handleChange.bind(this);
         this.submitDockerfilePath = this.submitDockerfilePath.bind(this);
         this.submitDockerfileBody = this.submitDockerfileBody.bind(this);
         this.state = {
             dockerfilePath: '',
             dockerfileBody: ''
         };
-    }
-
-    /**
-     * @param {Event} e
-     * @param {string} name
-     * @param {string} value
-     */
-    handleChange(e, {name, value}) {
-        let state = this.state;
-        state[name] = value;
-        this.setState(state);
     }
 
     submitDockerfilePath() {

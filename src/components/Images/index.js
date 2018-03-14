@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import _ from 'lodash';
 import {formatBytes, formatDate} from "../../helper";
 import Toolbar from "../Toolbar";
+import {checkboxChangeState} from "../../mixins/checkboxChangeState";
 
 class Images extends Component {
     /**
@@ -14,7 +15,7 @@ class Images extends Component {
      */
     constructor(props) {
         super(props);
-        this.checkboxChangeState = this.checkboxChangeState.bind(this);
+        this.checkboxChangeState = checkboxChangeState.bind(this);
         let toolbarConfig = {
             remove: {
                 label: 'Remove',
@@ -49,27 +50,6 @@ class Images extends Component {
 
     componentWillMount() {
         this.props.actions.requestData();
-    }
-
-    /**
-     * @param {Event} event
-     * @param {Object} data
-     */
-    checkboxChangeState(event, data) {
-        if (data.checked && !(data.value in this.state.selectedItems)) {
-            let state = this.state.selectedItems;
-            state[data.value] = this.props.list[data.value];
-            this.setState({
-                selectedItems: state
-            });
-        }
-        if (!data.checked && (data.value in this.state.selectedItems)) {
-            let state = this.state.selectedItems;
-            delete state[data.value];
-            this.setState({
-                selectedItems: state
-            });
-        }
     }
 
     /**

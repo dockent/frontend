@@ -141,7 +141,7 @@ export function removeContainers(selected) {
     return (dispatch) => {
         dispatch({type: CONTAINERS_REMOVE_REQUEST, payload: selected});
         fetch(Containers.remove, {
-            method: 'POST',
+            method: 'DELETE',
             body: JSON.stringify({
                 id: _.map(selected, (value) => (value.Id))
             })

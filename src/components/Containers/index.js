@@ -8,6 +8,7 @@ import _ from 'lodash';
 import './index.css';
 import Toolbar from "../Toolbar";
 import {ContainerState} from "../../enums/ContainerState";
+import {checkboxChangeState} from "../../mixins/checkboxChangeState";
 
 class Containers extends Component {
     /**
@@ -15,7 +16,7 @@ class Containers extends Component {
      */
     constructor(props) {
         super(props);
-        this.checkboxChangeState = this.checkboxChangeState.bind(this);
+        this.checkboxChangeState = checkboxChangeState.bind(this);
         let toolbarConfig = {
             start: {
                 label: 'Start',
@@ -74,27 +75,6 @@ class Containers extends Component {
 
     componentWillMount() {
         this.props.actions.requestData();
-    }
-
-    /**
-     * @param {Event} event
-     * @param {Object} data
-     */
-    checkboxChangeState(event, data) {
-        if (data.checked && !(data.value in this.state.selectedItems)) {
-            let state = this.state.selectedItems;
-            state[data.value] = this.props.list[data.value];
-            this.setState({
-                selectedItems: state
-            });
-        }
-        if (!data.checked && (data.value in this.state.selectedItems)) {
-            let state = this.state.selectedItems;
-            delete state[data.value];
-            this.setState({
-                selectedItems: state
-            });
-        }
     }
 
     /**

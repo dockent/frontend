@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import * as SettingsAction from '../../actions/SettingsActions';
 import {bindActionCreators} from "redux";
 import _ from 'lodash';
+import {handleChange} from "../../mixins/handleChange";
 
 class Settings extends Component {
     /**
@@ -13,26 +14,13 @@ class Settings extends Component {
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChange = handleChange.bind(this);
         this.state = {
             model: {
                 beanstalkHost: '',
                 beanstalkPort: 0
             }
         };
-    }
-
-    /**
-     * @param {Event} e
-     * @param {string} name
-     * @param {string} value
-     */
-    handleChange(e, {name, value}) {
-        let model = this.state.model;
-        model[name] = value;
-        this.setState({
-            model: model
-        });
     }
 
     submit() {

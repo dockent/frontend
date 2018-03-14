@@ -5,6 +5,7 @@ import {Link, withRouter} from "react-router-dom";
 import * as NetworkCreateActions from '../../../actions/Network/Create';
 import {bindActionCreators} from "redux";
 import _ from 'lodash';
+import {handleChange, handleChangeCheckbox} from "../../../mixins/handleChange";
 
 class NetworkCreate extends Component {
     /**
@@ -13,8 +14,8 @@ class NetworkCreate extends Component {
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this);
+        this.handleChange = handleChange.bind(this);
+        this.handleChangeCheckbox = handleChangeCheckbox.bind(this);
         this.state = {
             model: {
                 Name: '',
@@ -26,32 +27,6 @@ class NetworkCreate extends Component {
                 Ingress: false
             }
         };
-    }
-
-    /**
-     * @param {Event} e
-     * @param {string} name
-     * @param {string} value
-     */
-    handleChange(e, {name, value}) {
-        let model = this.state.model;
-        model[name] = value;
-        this.setState({
-            model: model
-        });
-    }
-
-    /**
-     * @param {Event} e
-     * @param {string} name
-     * @param {bool} checked
-     */
-    handleChangeCheckbox(e, {name, checked}) {
-        let model = this.state.model;
-        model[name] = checked;
-        this.setState({
-            model: model
-        });
     }
 
     submit() {
