@@ -5,13 +5,17 @@ import {Link, withRouter} from "react-router-dom";
 import * as ContainerCreateActions from '../../../actions/Containers/Create';
 import {bindActionCreators} from "redux";
 import _ from 'lodash';
+import {handleChange, handleChangeCheckbox} from "../../../mixins/handleChange";
 
 class Create extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this);
+        this.handleChange = handleChange.bind(this);
+        this.handleChangeCheckbox = handleChangeCheckbox.bind(this);
         this.state = {
             model: {
                 Image: '',
@@ -22,26 +26,13 @@ class Create extends Component {
         };
     }
 
-    handleChange(e, {name, value}) {
-        let model = this.state.model;
-        model[name] = value;
-        this.setState({
-            model: model
-        });
-    }
-
-    handleChangeCheckbox(e, {name, checked}) {
-        let model = this.state.model;
-        model[name] = checked;
-        this.setState({
-            model: model
-        });
-    }
-
     submit() {
         this.props.actions.createContainer(this.props.history, this.state.model);
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         let errors = [];
         _.each(this.props.errors, (value) => {
@@ -67,7 +58,7 @@ class Create extends Component {
                                 onChange={this.handleChange}/>
                 </Form.Field>
                 <Form.Field>
-                    <Form.Input label='Name' type='text' placeholder='new container' name='Name'
+                    <Form.Input label='Name' type='text' placeholder='new_container' name='Name'
                                 value={this.state.model.Name} onChange={this.handleChange}/>
                 </Form.Field>
                 <Form.Field>

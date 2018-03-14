@@ -39,7 +39,7 @@ export function removeNetwork(selected) {
     return (dispatch) => {
         dispatch({type: NETWORK_REMOVE_REQUEST, payload: selected});
         fetch(Network.remove, {
-            method: 'POST',
+            method: 'DELETE',
             body: JSON.stringify({
                 id: _.map(selected, (value) => (value.Id))
             })
@@ -52,7 +52,6 @@ export function removeNetwork(selected) {
                             type: NETWORK_REMOVE_SUCCESS,
                             payload: data
                         });
-                        requestData();
                     });
             })
             .catch((error) => {

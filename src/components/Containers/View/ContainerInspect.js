@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import {List} from "semantic-ui-react";
+import './index.css';
 
 export default class ContainerInspect extends Component {
+    /**
+     * @returns {*}
+     */
     render() {
         return (<List divided relaxed>
             <List.Item>
@@ -43,19 +47,19 @@ export default class ContainerInspect extends Component {
             <List.Item>
                 <List.Content>
                     <List.Header>Hostname path</List.Header>
-                    {this.props.model.HostnamePath}
+                    <p className='str-wrap'>{this.props.model.HostnamePath}</p>
                 </List.Content>
             </List.Item>
             <List.Item>
                 <List.Content>
                     <List.Header>Hosts path</List.Header>
-                    {this.props.model.HostsPath}
+                    <p className='str-wrap'>{this.props.model.HostsPath}</p>
                 </List.Content>
             </List.Item>
             <List.Item>
                 <List.Content>
                     <List.Header>Log path</List.Header>
-                    {this.props.model.LogPath}
+                    <p className='str-wrap'>{this.props.model.LogPath}</p>
                 </List.Content>
             </List.Item>
             <List.Item>

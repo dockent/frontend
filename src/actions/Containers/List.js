@@ -55,7 +55,6 @@ export function startContainers(selected) {
                             type: CONTAINERS_START_SUCCESS,
                             payload: data
                         });
-                        requestData();
                     });
             })
             .catch((error) => {
@@ -89,7 +88,6 @@ export function restartContainers(selected) {
                             type: CONTAINERS_RESTART_SUCCESS,
                             payload: data
                         });
-                        requestData();
                     });
             })
             .catch((error) => {
@@ -123,7 +121,6 @@ export function stopContainers(selected) {
                             type: CONTAINERS_STOP_SUCCESS,
                             payload: data
                         });
-                        requestData();
                     });
             })
             .catch((error) => {
@@ -144,7 +141,7 @@ export function removeContainers(selected) {
     return (dispatch) => {
         dispatch({type: CONTAINERS_REMOVE_REQUEST, payload: selected});
         fetch(Containers.remove, {
-            method: 'POST',
+            method: 'DELETE',
             body: JSON.stringify({
                 id: _.map(selected, (value) => (value.Id))
             })
@@ -157,7 +154,6 @@ export function removeContainers(selected) {
                             type: CONTAINERS_REMOVE_SUCCESS,
                             payload: data
                         });
-                        requestData();
                     });
             })
             .catch((error) => {

@@ -15,6 +15,11 @@ const initialState = {
     MemTotal: 0
 };
 
+/**
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {Object}
+ */
 export default function dashboard(state = initialState, action) {
     switch (action.type) {
         case DASHBOARD_REQUEST_SUCCESS:

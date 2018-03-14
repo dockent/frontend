@@ -7,17 +7,25 @@ import {Link} from "react-router-dom";
 import _ from 'lodash';
 import {formatBytes, formatDate} from "../../helper";
 import Toolbar from "../Toolbar";
+import {checkboxChangeState} from "../../mixins/checkboxChangeState";
 
 class Images extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
-        this.checkboxChangeState = this.checkboxChangeState.bind(this);
+        this.checkboxChangeState = checkboxChangeState.bind(this);
         let toolbarConfig = {
             remove: {
                 label: 'Remove',
                 icon: 'trash',
                 action: () => {
                     this.props.actions.removeImages(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.toArray(this.state.selectedItems).length > 0)
             },
@@ -26,6 +34,10 @@ class Images extends Component {
                 icon: 'trash',
                 action: () => {
                     this.props.actions.forceRemoveImages(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.toArray(this.state.selectedItems).length > 0)
             }
@@ -40,23 +52,9 @@ class Images extends Component {
         this.props.actions.requestData();
     }
 
-    checkboxChangeState(event, data) {
-        if (data.checked && !(data.value in this.state.selectedItems)) {
-            let state = this.state.selectedItems;
-            state[data.value] = this.props.list[data.value];
-            this.setState({
-                selectedItems: state
-            });
-        }
-        if (!data.checked && (data.value in this.state.selectedItems)) {
-            let state = this.state.selectedItems;
-            delete state[data.value];
-            this.setState({
-                selectedItems: state
-            });
-        }
-    }
-
+    /**
+     * @returns {*}
+     */
     render() {
         return (<Container>
             <Breadcrumb>
@@ -76,7 +74,10 @@ class Images extends Component {
                 </Table.Header>
                 <Table.Body>
                     {_.map(this.props.list, (value, key) => (<Table.Row key={key}>
-                        <Table.Cell><Checkbox onChange={this.checkboxChangeState} value={key}/></Table.Cell>
+                        <Table.Cell>
+                            <Checkbox onChange={this.checkboxChangeState} value={key}
+                                      checked={key in this.state.selectedItems}/>
+                        </Table.Cell>
                         <Table.Cell>
                             <Header as='h4'>
                                 <Header.Content>{value.RepoTags}</Header.Content>

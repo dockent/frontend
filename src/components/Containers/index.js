@@ -8,17 +8,25 @@ import _ from 'lodash';
 import './index.css';
 import Toolbar from "../Toolbar";
 import {ContainerState} from "../../enums/ContainerState";
+import {checkboxChangeState} from "../../mixins/checkboxChangeState";
 
 class Containers extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
-        this.checkboxChangeState = this.checkboxChangeState.bind(this);
+        this.checkboxChangeState = checkboxChangeState.bind(this);
         let toolbarConfig = {
             start: {
                 label: 'Start',
                 icon: 'play',
                 action: () => {
                     this.props.actions.startContainers(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.filter(_.toArray(this.state.selectedItems), (value) => (value.State !== ContainerState.RUNNING)).length > 0)
             },
@@ -27,6 +35,10 @@ class Containers extends Component {
                 icon: 'repeat',
                 action: () => {
                     this.props.actions.restartContainers(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.filter(_.toArray(this.state.selectedItems), (value) => (value.State === ContainerState.RUNNING)).length > 0)
             },
@@ -35,6 +47,10 @@ class Containers extends Component {
                 icon: 'stop',
                 action: () => {
                     this.props.actions.stopContainers(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.filter(_.toArray(this.state.selectedItems), (value) => (value.State === ContainerState.RUNNING)).length > 0)
             },
@@ -43,6 +59,10 @@ class Containers extends Component {
                 icon: 'trash',
                 action: () => {
                     this.props.actions.removeContainers(this.state.selectedItems);
+                    this.props.actions.requestData();
+                    this.setState({
+                        selectedItems: {}
+                    });
                 },
                 isActive: () => (_.toArray(this.state.selectedItems).length > 0)
             }
@@ -57,23 +77,10 @@ class Containers extends Component {
         this.props.actions.requestData();
     }
 
-    checkboxChangeState(event, data) {
-        if (data.checked && !(data.value in this.state.selectedItems)) {
-            let state = this.state.selectedItems;
-            state[data.value] = this.props.list[data.value];
-            this.setState({
-                selectedItems: state
-            });
-        }
-        if (!data.checked && (data.value in this.state.selectedItems)) {
-            let state = this.state.selectedItems;
-            delete state[data.value];
-            this.setState({
-                selectedItems: state
-            });
-        }
-    }
-
+    /**
+     * @param {string} state
+     * @returns {string}
+     */
     static mapStateToColor(state) {
         let map = {};
         map[ContainerState.RUNNING] = 'green';
@@ -84,6 +91,9 @@ class Containers extends Component {
         return map[state];
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         return (<Container>
             <Breadcrumb>
@@ -102,7 +112,10 @@ class Containers extends Component {
                 </Table.Header>
                 <Table.Body>
                     {_.map(this.props.list, (value, key) => (<Table.Row key={key}>
-                        <Table.Cell><Checkbox onChange={this.checkboxChangeState} value={key}/></Table.Cell>
+                        <Table.Cell>
+                            <Checkbox onChange={this.checkboxChangeState} value={key}
+                                      checked={key in this.state.selectedItems}/>
+                        </Table.Cell>
                         <Table.Cell>
                             <Header as='h4'>
                                 <Header.Content>

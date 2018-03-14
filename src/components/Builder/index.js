@@ -5,11 +5,15 @@ import {connect} from "react-redux";
 import _ from 'lodash';
 import {Breadcrumb, Button, Container, Form, Header, Message} from "semantic-ui-react";
 import * as BuilderActions from '../../actions/BuilderActions';
+import {handleChange} from "../../mixins/handleChange";
 
 class Builder extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChange = handleChange.bind(this);
         this.submit = this.submit.bind(this);
         this.state = {
             model: {
@@ -26,18 +30,13 @@ class Builder extends Component {
         };
     }
 
-    handleChange(e, {name, value}) {
-        let model = this.state.model;
-        model[name] = value;
-        this.setState({
-            model: model
-        });
-    }
-
     submit() {
         this.props.actions.builderRequest(this.props.history, this.state.model);
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         let errors = [];
         _.each(this.props.errors, (value) => {

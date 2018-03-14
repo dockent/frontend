@@ -42,7 +42,7 @@ export function removeImages(selected) {
     return (dispatch) => {
         dispatch({type: IMAGE_REMOVE_REQUEST, payload: selected});
         fetch(Images.remove, {
-            method: 'POST',
+            method: 'DELETE',
             body: JSON.stringify({
                 id: _.map(selected, (value) => (value.Id))
             })
@@ -55,7 +55,6 @@ export function removeImages(selected) {
                             type: IMAGE_REMOVE_SUCCESS,
                             payload: data
                         });
-                        requestData();
                     });
             })
             .catch((error) => {
@@ -76,7 +75,7 @@ export function forceRemoveImages(selected) {
     return (dispatch) => {
         dispatch({type: IMAGE_FORCE_REMOVE_REQUEST, payload: selected});
         fetch(Images.forceRemove, {
-            method: 'POST',
+            method: 'DELETE',
             body: JSON.stringify({
                 id: _.map(selected, (value) => (value.Id))
             })
@@ -89,7 +88,6 @@ export function forceRemoveImages(selected) {
                             type: IMAGE_FORCE_REMOVE_SUCCESS,
                             payload: data
                         });
-                        requestData();
                     });
             })
             .catch((error) => {

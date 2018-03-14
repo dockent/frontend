@@ -11,6 +11,9 @@ class Dashboard extends Component {
         this.props.actions.requestData();
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         return (<Container>
             <Grid>

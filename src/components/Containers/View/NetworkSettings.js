@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {List} from "semantic-ui-react";
 
 export default class NetworkSettings extends Component {
+    /**
+     * @returns {*}
+     */
     render() {
         return (<List divided relaxed>
             <List.Item>
@@ -25,7 +28,7 @@ export default class NetworkSettings extends Component {
             <List.Item>
                 <List.Content>
                     <List.Header>Hairpin mode</List.Header>
-                    {this.props.model.NetworkSettings.HairpinMode}
+                    {this.props.model.NetworkSettings.HairpinMode ? 'true' : 'false'}
                 </List.Content>
             </List.Item>
             <List.Item>

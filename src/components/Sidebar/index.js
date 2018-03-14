@@ -4,6 +4,9 @@ import {Link} from "react-router-dom";
 import Storage from "../../Storage";
 
 export default class Sidebar extends Component {
+    /**
+     * @returns {*}
+     */
     render() {
         return (
             <Menu vertical>

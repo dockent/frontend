@@ -5,13 +5,17 @@ import {Link, withRouter} from "react-router-dom";
 import * as NetworkCreateActions from '../../../actions/Network/Create';
 import {bindActionCreators} from "redux";
 import _ from 'lodash';
+import {handleChange, handleChangeCheckbox} from "../../../mixins/handleChange";
 
 class NetworkCreate extends Component {
+    /**
+     * @param {Object} props
+     */
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this);
+        this.handleChange = handleChange.bind(this);
+        this.handleChangeCheckbox = handleChangeCheckbox.bind(this);
         this.state = {
             model: {
                 Name: '',
@@ -25,26 +29,13 @@ class NetworkCreate extends Component {
         };
     }
 
-    handleChange(e, {name, value}) {
-        let model = this.state.model;
-        model[name] = value;
-        this.setState({
-            model: model
-        });
-    }
-
-    handleChangeCheckbox(e, {name, checked}) {
-        let model = this.state.model;
-        model[name] = checked;
-        this.setState({
-            model: model
-        });
-    }
-
     submit() {
         this.props.actions.createNetwork(this.props.history, this.state.model);
     }
 
+    /**
+     * @returns {*}
+     */
     render() {
         let errors = [];
         _.each(this.props.errors, (value) => {

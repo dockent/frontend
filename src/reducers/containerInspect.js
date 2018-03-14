@@ -76,6 +76,12 @@ const initialState = {
     }
 };
 
+/**
+ *
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {Object}
+ */
 export default function containerInspect(state = initialState, action) {
     switch (action.type) {
         case CONTAINER_INSPECT_SUCCESS:
