@@ -7,6 +7,7 @@ import App from "./components/App";
 import 'semantic-ui-css/semantic.min.css';
 import {Application} from "./providers/UrlProvider";
 import Storage from './Storage';
+import {BrowserRouter as Router} from "react-router-dom";
 
 fetch(Application.applicationConfig)
     .then((response) => {
@@ -15,7 +16,9 @@ fetch(Application.applicationConfig)
                 Storage.set('debugMode', data.debugMode);
                 const store = configureStore();
                 ReactDOM.render(<Provider store={store}>
-                    <App/>
+                    <Router>
+                        <App/>
+                    </Router>
                 </Provider>, document.getElementById('root'));
                 registerServiceWorker();
             });

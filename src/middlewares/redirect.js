@@ -1,4 +1,5 @@
 import {ROUTING} from "../constants/Routing";
+import Storage from "../Storage";
 
 /**
  * @param store
@@ -6,7 +7,11 @@ import {ROUTING} from "../constants/Routing";
  */
 export const redirect = store => next => action => {
     if (action.type === ROUTING) {
-        action.payload.history.push(action.payload.url);
+        let routerHistory = Storage.get('routerHistory');
+        if (routerHistory === undefined) {
+            throw 'Router history is absent inside storage';
+        }
+        routerHistory.push(action.payload.url);
     }
 
     return next(action);

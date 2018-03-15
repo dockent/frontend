@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Container, Grid, Header, Icon} from "semantic-ui-react";
 import Sidebar from "../Sidebar";
-import {Route, BrowserRouter as Router} from "react-router-dom";
+import {Route, Switch, withRouter} from "react-router-dom";
 import Dashboard from "../Dashboard";
 import './App.css';
 import Containers from "../Containers";
@@ -16,24 +16,30 @@ import NetworkView from '../Network/NetworkView';
 import NetworkCreate from '../Network/NetworkCreate';
 import Settings from '../Settings';
 import Storage from "../../Storage";
+import Error404 from "../Error404";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        Storage.set('routerHistory', this.props.history);
+    }
+
     /**
      * @returns {*}
      */
     render() {
         return (
-            <Router>
-                <Container className='main-container'>
-                    <Header as='h2'>
-                        <Icon name='terminal'/>
-                        <Header.Content>Dockent</Header.Content>
-                    </Header>
-                    <Grid>
-                        <Grid.Column width={4}>
-                            <Sidebar/>
-                        </Grid.Column>
-                        <Grid.Column width={12}>
+            <Container className='main-container'>
+                <Header as='h2'>
+                    <Icon name='terminal'/>
+                    <Header.Content>Dockent</Header.Content>
+                </Header>
+                <Grid>
+                    <Grid.Column width={4}>
+                        <Sidebar/>
+                    </Grid.Column>
+                    <Grid.Column width={12}>
+                        <Switch>
                             <Route exact path='/' component={Dashboard}/>
                             <Route exact path='/containers' component={Containers}/>
                             <Route exact path='/containers/view/:id' component={View}/>
@@ -45,13 +51,15 @@ class App extends Component {
                             <Route exact path='/network/view/:id' component={NetworkView}/>
                             <Route exact path='/network/create' component={NetworkCreate}/>
                             {Storage.get('debugMode') ? <Route exact path='/settings' component={Settings}/> : null}
-                        </Grid.Column>
-                    </Grid>
-                    <Notifications/>
-                </Container>
-            </Router>
+
+                            <Route component={Error404}/>
+                        </Switch>
+                    </Grid.Column>
+                </Grid>
+                <Notifications/>
+            </Container>
         );
     }
 }
 
-export default App;
+export default withRouter(App);

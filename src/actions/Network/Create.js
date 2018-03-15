@@ -4,11 +4,10 @@ import {ROUTING} from "../../constants/Routing";
 import {NETWORK_CREATE_FAIL, NETWORK_CREATE_REQUEST, NETWORK_CREATE_SUCCESS} from "../../constants/Network";
 
 /**
- * @param {history} history
  * @param {Object} data
  * @returns {function(*=)}
  */
-export function createNetwork(history, data) {
+export function createNetwork(data) {
     return (dispatch) => {
         dispatch({type: NETWORK_CREATE_REQUEST, payload: data});
         fetch(Network.create, {
@@ -27,7 +26,7 @@ export function createNetwork(history, data) {
                                 notify.show('Network created', 'success');
                                 dispatch({
                                     type: ROUTING,
-                                    payload: {history: history, url: '/network'}
+                                    payload: {url: '/network'}
                                 });
                                 break;
                             default:
