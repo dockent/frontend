@@ -53,6 +53,7 @@ class App extends Component {
                             {Storage.get('debugMode') ? <Route exact path='/settings' component={Settings}/> : null}
 
                             <Route component={Error404}/>
+                            <Route exact path='/404' component={Error404}/>
                         </Switch>
                     </Grid.Column>
                 </Grid>
