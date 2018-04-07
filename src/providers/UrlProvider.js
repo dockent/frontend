@@ -155,3 +155,12 @@ export class Application {
         return `${baseUrl}/index/applicationConfig`;
     }
 }
+
+export class Notifications {
+    /**
+     * @returns {string}
+     */
+    static get list() {
+        return `${baseUrl}/notifications`;
+    }
+}

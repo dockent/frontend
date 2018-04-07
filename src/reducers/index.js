@@ -10,6 +10,7 @@ import networkList from "./networkList";
 import networkInspect from "./networkInspect";
 import networkCreate from "./networkCreate";
 import settings from "./settings";
+import notificationsList from "./notificationsList";
 
 export const rootReducer = combineReducers({
     dashboard,
@@ -22,5 +23,6 @@ export const rootReducer = combineReducers({
     networkList,
     networkInspect,
     networkCreate,
-    settings
+    settings,
+    notificationsList
 });

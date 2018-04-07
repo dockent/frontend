@@ -16,6 +16,7 @@ import NetworkView from '../Network/NetworkView';
 import NetworkCreate from '../Network/NetworkCreate';
 import Settings from '../Settings';
 import Storage from "../../Storage";
+import NotificationsList from '../NotificationsList';
 
 class App extends Component {
     /**
@@ -35,6 +36,7 @@ class App extends Component {
                         </Grid.Column>
                         <Grid.Column width={12}>
                             <Route exact path='/' component={Dashboard}/>
+                            <Route exact path='/notifications' component={NotificationsList}/>
                             <Route exact path='/containers' component={Containers}/>
                             <Route exact path='/containers/view/:id' component={View}/>
                             <Route exact path='/containers/create' component={Create}/>

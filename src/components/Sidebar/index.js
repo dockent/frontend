@@ -11,9 +11,14 @@ export default class Sidebar extends Component {
         return (
             <Menu vertical>
                 <Menu.Item>
-                    <Menu.Header>
-                        <Link to='/'>Dashboard</Link>
-                    </Menu.Header>
+                    <Menu.Menu>
+                        <Menu.Item>
+                            <Link to='/'>Dashboard</Link>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Link to='/notifications'>Notifications</Link>
+                        </Menu.Item>
+                    </Menu.Menu>
                 </Menu.Item>
                 <Menu.Item>
                     <Menu.Header>Containers</Menu.Header>

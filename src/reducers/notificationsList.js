@@ -1,4 +1,4 @@
-import {CONTAINERS_LIST_SUCCESS} from "../constants/Containers";
+import {NOTIFICATIONS_LIST_SUCCESS} from "../constants/Notifications";
 
 const initialState = {};
 
@@ -7,9 +7,9 @@ const initialState = {};
  * @param {Object} action
  * @returns {Object}
  */
-export default function containersList(state = initialState, action) {
+export default function notificationsList(state = initialState, action) {
     switch (action.type) {
-        case CONTAINERS_LIST_SUCCESS:
+        case NOTIFICATIONS_LIST_SUCCESS:
             return {...state, ...action.payload};
         default:
             return state;
