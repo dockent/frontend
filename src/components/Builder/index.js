@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
-import {Link, withRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import _ from 'lodash';
 import {Breadcrumb, Button, Container, Form, Header, Message} from "semantic-ui-react";
@@ -31,7 +31,7 @@ class Builder extends Component {
     }
 
     submit() {
-        this.props.actions.builderRequest(this.props.history, this.state.model);
+        this.props.actions.builderRequest(this.state.model);
     }
 
     /**
@@ -109,4 +109,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Builder));
+export default connect(mapStateToProps, mapDispatchToProps)(Builder);

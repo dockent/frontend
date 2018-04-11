@@ -1,0 +1,1 @@
+export const ERROR_404_HANDLER = 'ERROR_404_HANDLER';

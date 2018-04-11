@@ -10,7 +10,7 @@ export default class Storage {
         if (key in this.storage) {
             return this.storage[key];
         }
-        return false;
+        return undefined;
     }
 
     /**

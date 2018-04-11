@@ -9,11 +9,10 @@ import {notify} from "react-notify-toast";
 import {ROUTING} from "../../constants/Routing";
 
 /**
- * @param {history} history
  * @param {string} path
  * @returns {function(*=)}
  */
-export function buildByDockerfilePath(history, path) {
+export function buildByDockerfilePath(path) {
     return (dispatch) => {
         dispatch({type: IMAGE_BUILD_BY_DOCKERFILE_PATH_REQUEST});
         fetch(Images.buildByDockerfilePath, {
@@ -34,7 +33,7 @@ export function buildByDockerfilePath(history, path) {
                                 notify.show(data.message, 'success');
                                 dispatch({
                                     type: ROUTING,
-                                    payload: {history: history, url: '/images'}
+                                    payload: {url: '/images'}
                                 });
                                 break;
                             default:
@@ -57,11 +56,10 @@ export function buildByDockerfilePath(history, path) {
 }
 
 /**
- * @param {history} history
  * @param {string} body
  * @returns {function(*=)}
  */
-export function buildByDockerfileBody(history, body) {
+export function buildByDockerfileBody(body) {
     return (dispatch) => {
         dispatch({type: IMAGE_BUILD_BY_DOCKERFILE_BODY_REQUEST});
         fetch(Images.buildByDockerfileBody, {
@@ -82,7 +80,7 @@ export function buildByDockerfileBody(history, body) {
                                 notify.show(data.message, 'success');
                                 dispatch({
                                     type: ROUTING,
-                                    payload: {history: history, url: '/images'}
+                                    payload: {url: '/images'}
                                 });
                                 break;
                             default:
