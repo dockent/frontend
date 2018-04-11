@@ -163,4 +163,18 @@ export class Notifications {
     static get list() {
         return `${baseUrl}/notifications`;
     }
+
+    /**
+     * @returns {string}
+     */
+    static get markAsUnread() {
+        return `${baseUrl}/notifications/markAsUnread`;
+    }
+
+    /**
+     * @returns {string}
+     */
+    static get delete() {
+        return `${baseUrl}/notifications/delete`;
+    }
 }

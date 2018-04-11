@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Breadcrumb, Container, Feed, Icon, Label} from "semantic-ui-react";
+import {Breadcrumb, Button, Container, Feed, Header, Icon, Label} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {bindActionCreators} from "redux";
@@ -9,6 +9,12 @@ import {NotificationStatus} from "../../enums/NotificationStatus";
 import {formatDate} from "../../helper";
 
 class NotificationsList extends Component {
+    constructor(props) {
+        super(props);
+        this.markAsUnread = this.markAsUnread.bind(this);
+        this.delete = this.delete.bind(this);
+    }
+
     componentWillMount() {
         this.props.actions.requestData();
     }
@@ -29,6 +35,24 @@ class NotificationsList extends Component {
     }
 
     /**
+     * @param {SyntheticEvent} event
+     * @param {Object} data
+     */
+    markAsUnread(event, data) {
+        this.props.actions.markAsUnread(data.value);
+        this.props.actions.requestData(false);
+    }
+
+    /**
+     * @param {SyntheticEvent} event
+     * @param {Object} data
+     */
+    delete(event, data) {
+        this.props.actions.deleteNotification(data.value);
+        this.props.actions.requestData(false);
+    }
+
+    /**
      * @returns {*}
      */
     render() {
@@ -38,15 +62,22 @@ class NotificationsList extends Component {
                 <Breadcrumb.Divider/>
                 <Breadcrumb.Section active>Notifications</Breadcrumb.Section>
             </Breadcrumb>
+            <Header size='large'>Notifications</Header>
             <Feed>
                 {_.map(this.props.list, (value, key) => (<Feed.Event key={key}>
+                    <Feed.Label>
+                        <Icon color={NotificationsList.mapStatusToColor(value.status)} name='info'/>
+                    </Feed.Label>
                     <Feed.Content>
                         <Feed.Summary>
-                            <Icon circular color={NotificationsList.mapStatusToColor(value.status)} />
-                            <Feed.User>{value.text}</Feed.User>
+                            {value.text}
                             <Feed.Date>{formatDate(value.time)}</Feed.Date>
                             {value.viewed ? null : <Label as="a" tag>New</Label>}
                         </Feed.Summary>
+                        <Feed.Meta>
+                            <Button size='mini' onClick={this.markAsUnread} value={value.id}>Mark as unread</Button>
+                            <Button size='mini' onClick={this.delete} value={value.id}>Delete</Button>
+                        </Feed.Meta>
                     </Feed.Content>
                 </Feed.Event>))}
             </Feed>

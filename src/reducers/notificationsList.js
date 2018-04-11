@@ -1,4 +1,4 @@
-import {NOTIFICATIONS_LIST_SUCCESS} from "../constants/Notifications";
+import {NOTIFICATIONS_DELETE_SUCCESS, NOTIFICATIONS_LIST_SUCCESS} from "../constants/Notifications";
 
 const initialState = {};
 
@@ -11,6 +11,8 @@ export default function notificationsList(state = initialState, action) {
     switch (action.type) {
         case NOTIFICATIONS_LIST_SUCCESS:
             return {...state, ...action.payload};
+        case NOTIFICATIONS_DELETE_SUCCESS:
+            return {};
         default:
             return state;
     }
