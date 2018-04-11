@@ -155,3 +155,26 @@ export class Application {
         return `${baseUrl}/index/applicationConfig`;
     }
 }
+
+export class Notifications {
+    /**
+     * @returns {string}
+     */
+    static get list() {
+        return `${baseUrl}/notifications`;
+    }
+
+    /**
+     * @returns {string}
+     */
+    static get markAsUnread() {
+        return `${baseUrl}/notifications/markAsUnread`;
+    }
+
+    /**
+     * @returns {string}
+     */
+    static get delete() {
+        return `${baseUrl}/notifications/delete`;
+    }
+}
