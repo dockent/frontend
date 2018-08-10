@@ -14,6 +14,7 @@ fetch(Application.applicationConfig)
         response.json()
             .then((data) => {
                 Storage.set('debugMode', data.debugMode);
+                Storage.set('eventSocket', data.eventSocket);
                 const store = configureStore();
                 ReactDOM.render(<Provider store={store}>
                     <Router>

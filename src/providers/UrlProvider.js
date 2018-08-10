@@ -177,4 +177,11 @@ export class Notifications {
     static get delete() {
         return `${baseUrl}/notifications/delete`;
     }
+
+    /**
+     * @returns {string}
+     */
+    static get unreadCount() {
+        return `${baseUrl}/notifications/unreadCount`;
+    }
 }

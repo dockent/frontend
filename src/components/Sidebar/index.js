@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Menu} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import Storage from "../../Storage";
+import NotificationsCount from "./NotificationsCount";
 
 export default class Sidebar extends Component {
     /**
@@ -17,6 +18,7 @@ export default class Sidebar extends Component {
                         </Menu.Item>
                         <Menu.Item>
                             <Link to='/notifications'>Notifications</Link>
+                            <NotificationsCount/>
                         </Menu.Item>
                     </Menu.Menu>
                 </Menu.Item>
