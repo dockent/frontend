@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Breadcrumb, Button, Checkbox, Container, Form, Header, Message} from "semantic-ui-react";
-import {Link, withRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
 import * as ContainerCreateActions from '../../../actions/Containers/Create';
 import {bindActionCreators} from "redux";
 import _ from 'lodash';
@@ -27,7 +27,7 @@ class Create extends Component {
     }
 
     submit() {
-        this.props.actions.createContainer(this.props.history, this.state.model);
+        this.props.actions.createContainer(this.state.model);
     }
 
     /**
@@ -83,4 +83,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Create));
+export default connect(mapStateToProps, mapDispatchToProps)(Create);

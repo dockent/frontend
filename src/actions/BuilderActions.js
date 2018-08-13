@@ -5,11 +5,10 @@ import {ROUTING} from "../constants/Routing";
 
 /**
  *
- * @param {history} history
  * @param {Object} data
  * @returns {function(*=)}
  */
-export function builderRequest(history, data) {
+export function builderRequest(data) {
     return (dispatch) => {
         dispatch({type: BUILDER_SUBMIT_REQUEST, payload: data});
         fetch(Builder.url, {
@@ -28,7 +27,7 @@ export function builderRequest(history, data) {
                                 notify.show(data.message, 'success');
                                 dispatch({
                                     type: ROUTING,
-                                    payload: {history: history, url: '/images'}
+                                    payload: {url: '/images'}
                                 });
                                 break;
                             default:

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Breadcrumb, Container, Header, Tab} from "semantic-ui-react";
-import {Link, withRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {bindActionCreators} from "redux";
 import * as ContainerInspectActions from '../../../actions/Containers/Inspect';
 import * as ContainersListActions from '../../../actions/Containers/List';
@@ -52,7 +52,7 @@ class View extends Component {
                 icon: 'trash',
                 action: () => {
                     this.props.listActions.removeContainers({0: this.props.inspect.model});
-                    this.props.redirect.redirect(this.props.history, '/containers');
+                    this.props.redirect.redirect('/containers');
                 },
                 isActive: () => (true)
             }
@@ -127,4 +127,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(View));
+export default connect(mapStateToProps, mapDispatchToProps)(View);

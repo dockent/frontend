@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Breadcrumb, Button, Checkbox, Container, Form, Header, Message} from "semantic-ui-react";
-import {Link, withRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
 import * as NetworkCreateActions from '../../../actions/Network/Create';
 import {bindActionCreators} from "redux";
 import _ from 'lodash';
@@ -30,7 +30,7 @@ class NetworkCreate extends Component {
     }
 
     submit() {
-        this.props.actions.createNetwork(this.props.history, this.state.model);
+        this.props.actions.createNetwork(this.state.model);
     }
 
     /**
@@ -98,4 +98,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NetworkCreate));
+export default connect(mapStateToProps, mapDispatchToProps)(NetworkCreate);

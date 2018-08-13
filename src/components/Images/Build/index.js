@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {Breadcrumb, Container, Header, List, Form, Button, Message} from "semantic-ui-react";
 import './index.css';
@@ -23,11 +23,11 @@ class Build extends Component {
     }
 
     submitDockerfilePath() {
-        this.props.actions.buildByDockerfilePath(this.props.history, this.state.dockerfilePath);
+        this.props.actions.buildByDockerfilePath(this.state.dockerfilePath);
     }
 
     submitDockerfileBody() {
-        this.props.actions.buildByDockerfileBody(this.props.history, this.state.dockerfileBody);
+        this.props.actions.buildByDockerfileBody(this.state.dockerfileBody);
     }
 
     /**
@@ -98,4 +98,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Build));
+export default connect(mapStateToProps, mapDispatchToProps)(Build);

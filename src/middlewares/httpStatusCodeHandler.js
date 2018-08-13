@@ -1,17 +1,13 @@
-import {ROUTING} from "../constants/Routing";
+import {ERROR_404_HANDLER} from "../constants/HttpStatusCodeHandler";
 import Storage from "../Storage";
 
-/**
- * @param store
- * @returns {function(*): function(*=)}
- */
-export const redirect = store => next => action => {
-    if (action.type === ROUTING) {
+export const httpStatusCodeHandler = store => next => action => {
+    if (action.type === ERROR_404_HANDLER) {
         let routerHistory = Storage.get('routerHistory');
         if (routerHistory === undefined) {
             throw new Error('Router history is absent inside storage');
         }
-        routerHistory.push(action.payload.url);
+        routerHistory.replace('/404');
     }
 
     return next(action);

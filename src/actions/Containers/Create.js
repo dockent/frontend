@@ -4,11 +4,10 @@ import {notify} from "react-notify-toast";
 import {ROUTING} from "../../constants/Routing";
 
 /**
- * @param {history} history
  * @param {Object} data
  * @returns {function(*=)}
  */
-export function createContainer(history, data) {
+export function createContainer(data) {
     return (dispatch) => {
         dispatch({type: CONTAINER_CREATE_REQUEST, payload: data});
         fetch(Containers.create, {
@@ -27,7 +26,7 @@ export function createContainer(history, data) {
                                 notify.show(data.message, 'success');
                                 dispatch({
                                     type: ROUTING,
-                                    payload: {history: history, url: '/containers'}
+                                    payload: {url: '/containers'}
                                 });
                                 break;
                             default:

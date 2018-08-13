@@ -3,8 +3,7 @@ import {CONTAINERS_LIST_SUCCESS} from "../constants/Containers";
 const initialState = {};
 
 /**
- *
- * * @param {Object} state
+ * @param {Object} state
  * @param {Object} action
  * @returns {Object}
  */
